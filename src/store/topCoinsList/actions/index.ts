@@ -45,6 +45,8 @@ export const getCoins = () => async (dispatch: Dispatch) => {
       }))
 
       dispatch(getCoinsSuccess(coins))
+    } else {
+      getCoinsFailure('Cannot load data from server.')
     }
   } catch (e) {
     getCoinsFailure(e)
