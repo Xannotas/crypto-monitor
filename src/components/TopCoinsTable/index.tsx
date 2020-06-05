@@ -9,7 +9,7 @@ type TProps = {
 }
 
 const TopCoinsTable: React.FC<TProps> = ({ coins }) => (
-  <div className="top-coins mt-4">
+  <div className="top-coins">
     <h2>Top 10 crypto currency</h2>
 
     <table className="table top-coins-table">

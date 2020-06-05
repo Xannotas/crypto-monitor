@@ -3,10 +3,11 @@ import { connect } from 'react-redux';
 
 import { TRootState } from '../../store';
 import { TCoinInfo } from '../../types';
+import { getCoins } from '../../store/topCoinsList/actions'
 import { coinsSelector, isFetchingSelector } from '../../store/topCoinsList/selectors';
 
 import TopCoinsTable from '../../components/TopCoinsTable';
-import { getCoins } from '../../store/topCoinsList/actions'
+import Loader from '../../components/Loader';
 
 type TStateProps = {
   coins: TCoinInfo[],
@@ -23,11 +24,11 @@ const CoinPage: React.FC<TStateProps & TDispatchProps> = ({ coins, getCoins, isF
   }, []) // eslint-disable-line
 
   return (
-    <section className="coins">
+    <section className="coins mt-4">
       {isFetching
-        ? <p>loading...</p>
+        ? <Loader />
         : <>
-          { coins.length
+          {coins.length
             ? <TopCoinsTable coins={coins} />
             : <p>no items</p>
           }
