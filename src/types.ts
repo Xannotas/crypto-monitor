@@ -19,3 +19,11 @@ export type TCoinCode = 'USD' | 'RUB' | 'EUR' |
   'DGB' | 'SEELE' | 'OGN' | 'ABT' | 'ERD' |
   'BTG' | 'DCR' | 'MBL' | 'RVN' | 'XVG' |
   'LUNA' | 'WTC' | 'CVT' | 'PAY' | 'AION'
+
+export type TCoinInfo = {
+  name: TCoinCode,
+  fullName: string,
+  price: string,
+  mktcap: string,
+  imageUrl: string
+}

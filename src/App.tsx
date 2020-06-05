@@ -1,14 +1,20 @@
 import React from 'react';
-import api from './api';
+import CoinsPage from './pages/CoinsPage';
 
 const App: React.FC = () => {
-  React.useEffect(() => {
-    api.prices.getPrice('USD', ['RUB', 'USD','EUR'])
-  }, [])
 
   return (
     <div className="App">
-
+      <div className="container">
+        <div className="row">
+          <div className="col-md-9">
+            <CoinsPage />
+          </div>
+          <div className="col-md-3">
+            sidebar
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

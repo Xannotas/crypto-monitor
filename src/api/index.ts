@@ -1,7 +1,9 @@
 import prices from './prices'
+import cryptoCurrency from './cryptoCurrency'
 
 const api = {
-  prices
+  prices,
+  cryptoCurrency
 }
 
 export default api
