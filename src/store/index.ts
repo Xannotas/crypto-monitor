@@ -1,9 +1,13 @@
-import { createStore, compose, applyMiddleware } from "redux";
+import { createStore, compose, applyMiddleware, combineReducers } from "redux";
 import thunk from 'redux-thunk'
 
 import topCoinsListReducer from './topCoinsList/reducers';
+import currencyConverterReducer from './currencyConverter/reducers';
 
-const rootReducer = topCoinsListReducer
+const rootReducer = combineReducers({
+  topCoinsList: topCoinsListReducer,
+  currencyConverter: currencyConverterReducer
+})
 
 // @ts-ignore
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

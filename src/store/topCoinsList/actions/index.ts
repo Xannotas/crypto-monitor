@@ -3,12 +3,11 @@ import { TCoinInfo } from './../../../types';
 import { Dispatch } from 'redux'
 import api from '../../../api'
 
-const GET_COINS = 'TOP_COINS/GET_COINS'
 const GET_COINS_REQUEST = 'TOP_COINS/GET_COINS:REQUEST'
 const GET_COINS_SUCCESS = 'TOP_COINS/GET_COINS:SUCCESS'
 const GET_COINS_FAILURE = 'TOP_COINS/GET_COINS:FAILURE'
 
-export type TActions = TGetCoinsRequest | TGetCoinsSuccess | TGetCoins | TGetCoinsFailure
+export type TActions = TGetCoinsRequest | TGetCoinsSuccess  | TGetCoinsFailure
 
 type TGetCoinsRequest = { type: typeof GET_COINS_REQUEST }
 const getCoinsRequest = () => ({
@@ -27,7 +26,6 @@ const getCoinsSuccess = (payload: TCoinInfo[]) => ({
   payload
 })
 
-type TGetCoins = { type: typeof GET_COINS }
 export const getCoins = () => async (dispatch: Dispatch) => {
   dispatch(getCoinsRequest())
 

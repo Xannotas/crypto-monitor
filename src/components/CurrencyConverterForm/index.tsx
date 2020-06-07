@@ -7,26 +7,47 @@ import { currencies } from '../../constants'
 import Input from '../Input'
 import Select from '../Select'
 
-const CurrencyConverterForm = () => {
+type TProps = {
+  price: number,
+  onCurrencyChange: (currency: TCoinCode, targetCurrency: TCoinCode) => void
+}
+
+const CurrencyConverterForm: React.FC<TProps> = ({ price, onCurrencyChange }) => {
   const [firstFieldValue, setFirstFieldValue] = useState<string>('')
   const [secondFieldValue, setSecondFieldValue] = useState<string>('')
+
   const [firstCurrency, setFirstCurrency] = useState<TCoinCode>('BTC')
   const [secondCurrency, setSecondCurrency] = useState<TCoinCode>('USD')
+
 
   const options: JSX.Element[] = useMemo(() => Object.entries(currencies).map(([key, value]) => (
     <option key={key} value={key}>{value}</option>
   )), [currencies]) // eslint-disable-line
 
+  const onInputChange = (newValue: string, setCurrentFieldValue: Function, setTargetFieldValue: Function) => {
+    setCurrentFieldValue(newValue)
+  }
+
   return (
     <div className='converter'>
       <div className="converter-field input-group mt-2">
-        <Input value={firstFieldValue} onChange={setFirstFieldValue} pattern={/[0-9]*/gi} />
-        <Select value={firstCurrency} onChange={(value: string) => setFirstCurrency(value as TCoinCode)} options={options} />
+        <Input pattern={/[0-9]*/gi} value={firstFieldValue} onChange={(newValue) => onInputChange(newValue, setFirstFieldValue, setSecondFieldValue)} />
+
+        <Select options={options} value={firstCurrency}
+          onChange={(value: string) => {
+            onCurrencyChange(value as TCoinCode, secondCurrency)
+            setFirstCurrency(value as TCoinCode)
+          }} />
       </div>
 
       <div className="converter-field input-group mt-2">
-        <Input value={secondFieldValue} onChange={setSecondFieldValue} pattern={/[0-9]*/gi} />
-        <Select value={secondCurrency} onChange={(value: string) => setSecondCurrency(value as TCoinCode)} options={options} />
+        <Input pattern={/[0-9]*/gi} value={secondFieldValue} onChange={(newValue) => onInputChange(newValue, setSecondFieldValue, setFirstFieldValue)} />
+
+        <Select options={options} value={secondCurrency}
+          onChange={(value: string) => {
+            onCurrencyChange(firstCurrency, value as TCoinCode)
+            setSecondCurrency(value as TCoinCode)
+          }} />
       </div>
     </div>
   )

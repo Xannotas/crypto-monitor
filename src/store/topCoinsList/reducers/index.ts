@@ -9,7 +9,7 @@ const initialState = {
 
 export type TReducerState = typeof initialState 
 
-const topCoinsReducer = (state = initialState, action: TActions) => {
+const topCoinsReducer = (state = initialState, action: TActions) : TReducerState=> {
   switch (action.type) {
     case 'TOP_COINS/GET_COINS:SUCCESS': {
       return {

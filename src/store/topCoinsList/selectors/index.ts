@@ -1,4 +1,4 @@
-import { TReducerState } from '../reducers'
+import { TRootState } from '../..'
 
-export const coinsSelector = (state: TReducerState) => state.coins
-export const isFetchingSelector = (state: TReducerState) => state.isFetching
+export const coinsSelector = (state: TRootState) => state.topCoinsList.coins
+export const isFetchingSelector = (state: TRootState) => state.topCoinsList.isFetching
