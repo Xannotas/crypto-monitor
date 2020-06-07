@@ -18,7 +18,6 @@ type TDispatchProps = {
 }
 
 const CoinPage: React.FC<TStateProps & TDispatchProps> = ({ coins, getCoins, isFetching }) => {
-
   useEffect(() => {
     getCoins()
   }, []) // eslint-disable-line

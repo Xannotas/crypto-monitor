@@ -32,7 +32,7 @@ export const getCoins = () => async (dispatch: Dispatch) => {
   dispatch(getCoinsRequest())
 
   try {
-    const response = await api.cryptoCurrency.getTopList()
+    const response = await api.toplists.getTopListByMarketCap()
     const data = response.Data as any[]
 
     if (response.Type === 100) {

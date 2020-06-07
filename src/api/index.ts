@@ -1,9 +1,9 @@
 import prices from './prices'
-import cryptoCurrency from './cryptoCurrency'
+import toplists from './toplists'
 
 const api = {
   prices,
-  cryptoCurrency
+  toplists
 }
 
 export default api
