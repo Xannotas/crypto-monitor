@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 
 import './currencyConverter.scss'
@@ -7,12 +7,9 @@ import { TRootState } from '../../store'
 import { priceSelector, isFetchingSelector } from '../../store/currencyConverter/selectors'
 import { getPrice } from '../../store/currencyConverter/actions'
 
-import Loader from '../../components/Loader'
 import CurrencyConverterForm from '../../components/CurrencyConverterForm'
 
 type TMapState = {
-  // currencyCode: TCoinCode,
-  // targetCurrencyCode: TCoinCode,
   price: number,
   isFetching: boolean
 }
@@ -24,9 +21,15 @@ type TMapDispatch = {
 type TProps = TMapState & TMapDispatch
 
 const CurrencyConverter: React.FC<TProps> = ({ price, getPrice, isFetching }) => {
+  const defaultCurrency: TCoinCode = 'BTC'
+  const defaultTargetCurrency: TCoinCode = 'USD'
   const onCurrencyChange = (currency: TCoinCode, targetCurrency: TCoinCode) => {
     getPrice(currency, targetCurrency)
   }
+
+  useEffect(() => {
+    getPrice(defaultCurrency, defaultTargetCurrency)
+  }, [])  // eslint-disable-line
 
   return (
     <div className='currency-converter'>
@@ -35,7 +38,12 @@ const CurrencyConverter: React.FC<TProps> = ({ price, getPrice, isFetching }) =>
           <span className="spinner-border spinner-border-sm ml-2" role="status" aria-hidden="true"></span>
         }
       </h5>
-      <CurrencyConverterForm price={price} onCurrencyChange={onCurrencyChange} />
+      <CurrencyConverterForm
+        price={price}
+        onCurrencyChange={onCurrencyChange}
+        defaultCurrency={defaultCurrency}
+        defaultTargetCurrency={defaultTargetCurrency}
+      />
     </div>
   )
 }

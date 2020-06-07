@@ -7,26 +7,20 @@ type TProps = {
   value: string,
   onChange: (newValue: string) => void,
 
+  valueType?: 'number',
   placeholder?: string,
   type?: string,
-  pattern?: RegExp,
   className?: string,
 }
 
-const Input: React.FC<TProps> = ({ className, pattern, placeholder, value, onChange, type }) => {
+const Input: React.FC<TProps> = ({ className, placeholder, value, onChange, type, valueType }) => {
 
   const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     let input = e.currentTarget.value
-    if (pattern && input.match(pattern)) {
-      input = input.match(pattern)!.join('')
-
-      if (input.length > 1 && input[0] === '0') {
-        input = input.slice(1)
-      }
-
-      onChange(input)
+    if (valueType === 'number') {
+      input = input.replace(/[^.\d]+/g, "").replace(/^([^\.]*\.)|\./g, '$1') // eslint-disable-line
     }
-
+    onChange(input)
   }
 
   return (
