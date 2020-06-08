@@ -18,13 +18,21 @@ type TDispatchProps = {
 }
 
 const CoinPage: React.FC<TStateProps & TDispatchProps> = ({ coins, getCoins, isFetching }) => {
+  const coinsUpdateTimeMs = 130 * 1000
   useEffect(() => {
     getCoins()
+    const intervalUpdate = setInterval(()=>{
+      getCoins()
+    }, coinsUpdateTimeMs)
+
+    return () => {
+      clearInterval(intervalUpdate)
+    }
   }, []) // eslint-disable-line
 
   return (
     <section className="coins mt-4">
-      {isFetching
+      {isFetching && !coins.length
         ? <Loader />
         : <>
           {coins.length

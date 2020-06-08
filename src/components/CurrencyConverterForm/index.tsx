@@ -42,7 +42,8 @@ const CurrencyConverterForm: React.FC<TProps> = ({ price, onCurrencyChange, defa
           onChange={(value: string) => {
             onCurrencyChange(value as TCoinCode, secondCurrency)
             setFirstCurrency(value as TCoinCode)
-          }} />
+          }}
+        />
       </div>
 
       <div className="converter-field input-group mt-2">
@@ -55,7 +56,8 @@ const CurrencyConverterForm: React.FC<TProps> = ({ price, onCurrencyChange, defa
           onChange={(value: string) => {
             onCurrencyChange(firstCurrency, value as TCoinCode)
             setSecondCurrency(value as TCoinCode)
-          }} />
+          }}
+        />
       </div>
     </div>
   )
