@@ -1,10 +1,9 @@
-import { TActions } from './../actions/index';
-import { TCoinCode } from './../../../types';
-import { } from '../actions';
+import { TActions } from './../actions';
+// import { TCoinCode } from './../../../types';
 
 const initialState = {
-  currencyCode: 'BTC' as TCoinCode,
-  targetCurrencyCode: 'USD' as TCoinCode,
+  // currencyCode: 'BTC' as TCoinCode,
+  // targetCurrencyCode: 'USD' as TCoinCode,
   price: 0 as number,
 
   isFetching: false as boolean,

@@ -3,10 +3,12 @@ import thunk from 'redux-thunk'
 
 import topCoinsListReducer from './topCoinsList/reducers';
 import currencyConverterReducer from './currencyConverter/reducers';
+import coinInfoReducer from './coinInfo/reducers';
 
 const rootReducer = combineReducers({
   topCoinsList: topCoinsListReducer,
-  currencyConverter: currencyConverterReducer
+  currencyConverter: currencyConverterReducer,
+  coinInfo: coinInfoReducer
 })
 
 // @ts-ignore

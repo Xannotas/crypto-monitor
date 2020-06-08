@@ -26,7 +26,7 @@ const TopCoinsTable: React.FC<TProps> = ({ coins }) => (
           <tr key={coin.name}>
             <th scope="row">{++index}</th>
             <td>
-              <Link to={coin.name} className='top-coins__coin-name'>
+              <Link to={`coins/${coin.name}`} className='top-coins__coin-name'>
                 <img className='top-coins__coin-image' src={coin.imageUrl} alt='coin logo' />
                 <span className='top-coins__coin-text'>
                   <strong>{coin.name}</strong>

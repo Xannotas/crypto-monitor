@@ -7,21 +7,21 @@ const GET_COINS_REQUEST = 'TOP_COINS/GET_COINS:REQUEST'
 const GET_COINS_SUCCESS = 'TOP_COINS/GET_COINS:SUCCESS'
 const GET_COINS_FAILURE = 'TOP_COINS/GET_COINS:FAILURE'
 
-export type TActions = TGetCoinsRequest | TGetCoinsSuccess  | TGetCoinsFailure
+export type TActions = TGetCoinsRequest | TGetCoinsSuccess | TGetCoinsFailure
 
 type TGetCoinsRequest = { type: typeof GET_COINS_REQUEST }
-const getCoinsRequest = () => ({
+const getCoinsRequest = (): TGetCoinsRequest => ({
   type: GET_COINS_REQUEST
 })
 
 type TGetCoinsFailure = { type: typeof GET_COINS_FAILURE, payload: string }
-const getCoinsFailure = (error: string) => ({
+const getCoinsFailure = (error: string): TGetCoinsFailure => ({
   type: GET_COINS_FAILURE,
   payload: error
 })
 
 type TGetCoinsSuccess = { type: typeof GET_COINS_SUCCESS, payload: TCoinInfo[] }
-const getCoinsSuccess = (payload: TCoinInfo[]) => ({
+const getCoinsSuccess = (payload: TCoinInfo[]): TGetCoinsSuccess => ({
   type: GET_COINS_SUCCESS,
   payload
 })

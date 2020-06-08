@@ -7,18 +7,18 @@ const GET_PRICE_SUCCESS = 'CURRENCY_CONVERTER/GET_PRICE:SUCCESS'
 const GET_PRICE_FAILURE = 'CURRENCY_CONVERTER/GET_PRICE:FAILURE'
 
 type TGetPriceRequest = { type: typeof GET_PRICE_REQUEST }
-const getPriceRequest = () => ({
+const getPriceRequest = (): TGetPriceRequest => ({
   type: GET_PRICE_REQUEST
 })
 
 type TGetPriceFailure = { type: typeof GET_PRICE_FAILURE, payload: string }
-const getPriceFailure = (error: string) => ({
+const getPriceFailure = (error: string): TGetPriceFailure => ({
   type: GET_PRICE_FAILURE,
   payload: error
 })
 
 type TGetPriceSuccess = { type: typeof GET_PRICE_SUCCESS, payload: number }
-const getPriceSuccess = (payload: number) => ({
+const getPriceSuccess = (payload: number):TGetPriceSuccess => ({
   type: GET_PRICE_SUCCESS,
   payload
 })

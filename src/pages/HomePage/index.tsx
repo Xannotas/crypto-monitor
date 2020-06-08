@@ -17,7 +17,7 @@ type TDispatchProps = {
   getCoins: () => void
 }
 
-const CoinPage: React.FC<TStateProps & TDispatchProps> = ({ coins, getCoins, isFetching }) => {
+const HomePage: React.FC<TStateProps & TDispatchProps> = ({ coins, getCoins, isFetching }) => {
   const coinsUpdateTimeMs = 130 * 1000
   useEffect(() => {
     getCoins()
@@ -50,4 +50,4 @@ const mapState = (state: TRootState) => ({
   isFetching: isFetchingSelector(state)
 })
 
-export default connect<TStateProps, TDispatchProps, {}, TRootState>(mapState, { getCoins })(CoinPage);
+export default connect<TStateProps, TDispatchProps, {}, TRootState>(mapState, { getCoins })(HomePage);

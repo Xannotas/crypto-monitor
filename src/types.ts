@@ -9,3 +9,7 @@ export type TCoinInfo = {
   mktcap: string,
   imageUrl: string
 }
+
+export type TCoinFullInfo = TCoinInfo & {
+  
+}
