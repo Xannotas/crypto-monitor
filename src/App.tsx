@@ -5,10 +5,12 @@ import HomePage from './pages/HomePage';
 import CoinPage from './pages/CoinPage';
 
 import CurrencyConverter from './containers/CurrencyConverter';
+import Header from './components/Header';
 
 const App: React.FC = () => {
   return (
     <div className="App">
+      <Header />
       <div className="container mt-3">
         <div className="row">
           <div className="col-md-8">

@@ -37,12 +37,17 @@ const CoinPage: React.FC<TProps> = ({ match, getCoinInfo, isFetching, coinInfo }
   }
 
   return (
-    <div>
+    <div className='coin'>
       {isFetching
         ? <Loader />
-        : <div>
-          <h2>{coinCode}</h2>
-        </div>
+        : <>
+          {coinInfo &&
+            <div className="coin-content">
+              <h2>{coinInfo.fullName}</h2>
+              <h3>{coinInfo.name}</h3>
+            </div>
+          }
+        </>
       }
     </div>
   )
