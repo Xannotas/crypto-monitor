@@ -41,16 +41,19 @@ export const getCoinInfo = (coinCode: TCoinCode) => async (dispatch: Dispatch, g
     const targetCoinCode : TCoinCode= getState().coinInfo.targetCoinCode
     const response = await api.coinInfo.getCoinInfo(coinCode,targetCoinCode)
     const raw = response.RAW[coinCode][targetCoinCode]
+    const display = response.DISPLAY[coinCode][targetCoinCode]
     
     if (response.Response !== 'Error') {
       const data: TCoinFullInfo = {
         code: coinCode,
         name: currencies[coinCode],
-        price: raw.PRICE,
+        price: display.PRICE,
         mktcap: raw.MKTCAP,
-        directVol: raw.VOLUME24HOURTO,
-        totalVol: raw.TOTALVOLUME24HTO,
+        directVol: raw.VOLUME24HOUR,
+        totalVol: raw.TOTALVOLUME24H,
         imageUrl: imagesUrlServer + raw.IMAGEURL,
+        changePercent24Hour: display.CHANGEPCT24HOUR,
+        change24Hour: display.CHANGE24HOUR,
       }
       dispatch(getCoinInfoSuccess(data))
     } else {

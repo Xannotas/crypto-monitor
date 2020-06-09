@@ -13,5 +13,6 @@ export type TCoinInfo = {
 }
 
 export type TCoinFullInfo = TCoinInfo & {
-  
+  changePercent24Hour: string,
+  change24Hour: string,
 }

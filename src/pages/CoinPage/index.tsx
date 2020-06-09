@@ -9,6 +9,7 @@ import { currencies } from '../../constants'
 import { isFetchingSelector, coinInfoSelector } from '../../store/coinInfo/selectors'
 
 import Loader from '../../components/Loader'
+import CoinInfo from '../../components/CoinInfo'
 
 type TMapState = {
   coinInfo: TCoinFullInfo,
@@ -47,10 +48,7 @@ const CoinPage: React.FC<TProps> = ({ match, getCoinInfo, resetCoinInfo, isFetch
           ? <Loader />
           : <>
             {coinInfo &&
-              <div className="coin-content">
-                <h2>{coinInfo.name}</h2>
-                <h3>{coinInfo.code}</h3>
-              </div>
+              <CoinInfo coinInfo={coinInfo}/>
             }
           </>
         }

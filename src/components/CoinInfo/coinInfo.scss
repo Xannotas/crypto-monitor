@@ -1,0 +1,34 @@
+.coin-info {
+  &__title {
+    small {
+      font-weight: 500;
+      color: #7e7e7e
+    }
+  }
+
+  &__logo img {
+    width: 80px;
+  }
+
+  &-price {
+    display: flex;
+    align-items: center;
+
+    &__wrapper {
+      margin-left: 20px;
+    }
+
+    &__arrow {
+      vertical-align: super;
+      font-size: 1.6rem;
+    }
+
+    &__change {
+      color: #26da71;
+
+      &--is-down {
+        color: #ff7060;
+      }
+    }
+  }
+}
