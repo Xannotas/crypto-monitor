@@ -3,10 +3,12 @@ import { currencies } from './constants';
 export type TCoinCode = keyof typeof currencies
 
 export type TCoinInfo = {
-  name: TCoinCode,
-  fullName: string,
+  code: TCoinCode,
+  name: string,
   price: string,
   mktcap: string,
+  directVol: string,
+  totalVol: string,
   imageUrl: string
 }
 

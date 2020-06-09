@@ -1,33 +1,54 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
+
+import api from './api';
+import { TRootState } from './store';
+import { TCoinCode } from './types';
+import { targetCoinCodeSelector } from './store/coinInfo/selectors';
 
 import HomePage from './pages/HomePage';
 import CoinPage from './pages/CoinPage';
-
-import CurrencyConverter from './containers/CurrencyConverter';
 import Header from './components/Header';
+import { setCurrencies } from './constants';
 
-const App: React.FC = () => {
+type TMapState = {
+  targetCoinCode: TCoinCode
+}
+
+const App: React.FC<TMapState> = ({ targetCoinCode }) => {
+
+  useEffect(() => {
+    try {
+      api.coinInfo.getCoinsBaseInfo(100, targetCoinCode).then(res => {
+        const coinsEntries = res.Data.map((row: any) => [row.SYMBOL, row.NAME])
+        const currencies = Object.fromEntries(coinsEntries)
+
+        if (currencies) {
+          setCurrencies(currencies)
+        }
+      })
+    } catch (e) {
+      console.log(e)
+    }
+  }, []) // eslint-disable-line
+
   return (
     <div className="App">
       <Header />
-      <div className="container mt-3">
-        <div className="row">
-          <div className="col-md-8">
-            <Switch>
-              <Route exact path='/home' component={HomePage} />
-              <Route exact path='/coins/:code' component={CoinPage} />
 
-              <Redirect from='*' to='/home' />
-            </Switch>
-          </div>
-          <div className="col-md-4">
-            <CurrencyConverter />
-          </div>
-        </div>
-      </div>
+      <Switch>
+        <Route exact path='/home' component={HomePage} />
+        <Route exact path='/coins/:code' component={CoinPage} />
+
+        <Redirect from='*' to='/home' />
+      </Switch>
     </div>
   );
 }
 
-export default App;
+const mapState = (state: TRootState): TMapState => ({
+  targetCoinCode: targetCoinCodeSelector(state)
+})
+
+export default connect<TMapState, {}, {}, TRootState>(mapState)(App);

@@ -1,23 +1,30 @@
 .top-coins {
   &__coin {
-    &-name{
+    &-name {
       display: flex;
     }
-    &-image{
-      width: 2rem;
+
+    &-image {
+      height: 2rem;
       margin-right: 10px;
     }
+
     &-text {
       line-height: 1rem;
     }
   }
 
-  &-table{
-    thead tr th{
-      &:first-child{
+  &-table {
+    thead tr th {
+      &:first-child {
         width: 40px;
       }
     }
+
+    tbody tr td,
+    tbody tr th {
+      vertical-align: inherit;
+    }
   }
-  
+
 }

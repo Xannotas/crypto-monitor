@@ -9,5 +9,13 @@ export default {
     return axios.get(url).then(({ data }) => data).catch(e => {
       console.error(e)
     })
-  }
+  },
+  getTopListByTierVolume: (limit: number = 10, targetCoin: TCoinCode) => {
+    const url = `${BASE_URL}top/totaltoptiervolfull?limit=${limit}&tsym=${targetCoin}`
+
+    return axios.get(url).then(({ data }) => data).catch(e => {
+      console.error(e)
+    })
+  },
+  
 }

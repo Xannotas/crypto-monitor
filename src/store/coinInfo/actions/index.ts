@@ -5,28 +5,34 @@ import { Dispatch } from 'redux';
 
 import api from '../../../api';
 
-const COIN_LOAD_REQUEST = 'COIN/LOAD:REQUEST'
-const COIN_LOAD_SUCCESS = 'COIN/LOAD:SUCCESS'
-const COIN_LOAD_FAILURE = 'COIN/LOAD:FAILURE'
+const COIN_INFO_LOAD_REQUEST = 'COIN_INFO/LOAD:REQUEST'
+const COIN_INFO_LOAD_SUCCESS = 'COIN_INFO/LOAD:SUCCESS'
+const COIN_INFO_LOAD_FAILURE = 'COIN_INFO/LOAD:FAILURE'
+const COIN_INFO_RESET = 'COIN_INFO/RESET'
 
-type TGetCoinInfoRequest = { type: typeof COIN_LOAD_REQUEST }
+type TGetCoinInfoRequest = { type: typeof COIN_INFO_LOAD_REQUEST }
 const getCoinInfoRequest = (): TGetCoinInfoRequest => ({
-  type: COIN_LOAD_REQUEST
+  type: COIN_INFO_LOAD_REQUEST
 })
 
-type TGetCoinInfoSuccess = { type: typeof COIN_LOAD_SUCCESS, payload: TCoinFullInfo }
+type TGetCoinInfoSuccess = { type: typeof COIN_INFO_LOAD_SUCCESS, payload: TCoinFullInfo }
 const getCoinInfoSuccess = (payload: TCoinFullInfo): TGetCoinInfoSuccess => ({
-  type: COIN_LOAD_SUCCESS,
+  type: COIN_INFO_LOAD_SUCCESS,
   payload
 })
 
-type TGetCoinInfoFailure = { type: typeof COIN_LOAD_FAILURE, payload: string }
+type TGetCoinInfoFailure = { type: typeof COIN_INFO_LOAD_FAILURE, payload: string }
 const getCoinInfoFailure = (payload: string): TGetCoinInfoFailure => ({
-  type: COIN_LOAD_FAILURE,
+  type: COIN_INFO_LOAD_FAILURE,
   payload
 })
 
-export type TActions = TGetCoinInfoRequest | TGetCoinInfoSuccess | TGetCoinInfoFailure
+type TResetCoinInfo = { type: typeof COIN_INFO_RESET }
+export const resetCoinInfo = (): TResetCoinInfo => ({
+  type: COIN_INFO_RESET
+})
+
+export type TActions = TGetCoinInfoRequest | TGetCoinInfoSuccess | TGetCoinInfoFailure | TResetCoinInfo
 
 
 export const getCoinInfo = (coinCode: TCoinCode) => async (dispatch: Dispatch, getState: () => TRootState) => {
@@ -38,10 +44,12 @@ export const getCoinInfo = (coinCode: TCoinCode) => async (dispatch: Dispatch, g
     
     if (response.Response !== 'Error') {
       const data: TCoinFullInfo = {
-        name: coinCode,
-        fullName: currencies[coinCode],
+        code: coinCode,
+        name: currencies[coinCode],
         price: raw.PRICE,
         mktcap: raw.MKTCAP,
+        directVol: raw.VOLUME24HOURTO,
+        totalVol: raw.TOTALVOLUME24HTO,
         imageUrl: imagesUrlServer + raw.IMAGEURL,
       }
       dispatch(getCoinInfoSuccess(data))

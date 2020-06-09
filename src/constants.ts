@@ -1,35 +1,21 @@
+import defaultCurrencies from './assets/defaultCurrencies.json'
+
 export const imagesUrlServer = 'https://www.cryptocompare.com'
 
-export const currencies = {
-  'USD': 'United States Dollar',
-  'RUB': 'Russian Ruble',
-  'EUR': 'Euro',
+export const realCurrencies = {
+  USD: 'United States Dollar',
+  RUB: 'Russian Ruble',
+  EUR: 'Euro'
+}
 
-  'BTC': 'Bitcoin',
-  'ETH': 'Ethereum',
-  'ADA': 'Cardano',
-  'BCH': 'Bitcoin Cash',
-  'XRP': 'XRP',
-  'EOS': 'EOS',
-  'LTC': 'Litecoin',
-  'ETC': 'Ethereum Classic',
-  'BSV': 'Bitcoin SV',
-  'TRX': 'TRON',
-  'XLM': 'Stellar',
-  'BNB': 'Binance Coin',
-  'LINK': 'Chainlink',
-  'XTZ': 'Tezos',
-  'NEO': 'NEO',
-  'ZEC': 'ZCash',
-  'DASH': 'Dash',
-  'ATOM': 'Cosmos',
-  'ONT': 'Ontology',
-  'THETA': 'Theta',
-  'ZIL': 'Zilliqa',
-  'MIOTA': 'IOTA',
-  'HYN': 'Hyperion',
-  'MATIC': 'Matic Network',
-  'CRO': 'Crypto.com Chain',
-  'BAT': 'Basic Attention Token',
-  'GTO': 'GIFTO',
+export let currencies = {
+  ...realCurrencies,
+  ...defaultCurrencies.crypto
+}
+
+export const setCurrencies = (newCurrencies: any) => {
+  currencies = {
+    ...realCurrencies,
+    ...newCurrencies
+  }
 }

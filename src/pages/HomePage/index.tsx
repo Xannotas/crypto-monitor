@@ -8,6 +8,7 @@ import { coinsSelector, isFetchingSelector } from '../../store/topCoinsList/sele
 
 import TopCoinsTable from '../../components/TopCoinsTable';
 import Loader from '../../components/Loader';
+import CurrencyConverter from '../../containers/CurrencyConverter';
 
 type TStateProps = {
   coins: TCoinInfo[],
@@ -21,7 +22,7 @@ const HomePage: React.FC<TStateProps & TDispatchProps> = ({ coins, getCoins, isF
   const coinsUpdateTimeMs = 130 * 1000
   useEffect(() => {
     getCoins()
-    const intervalUpdate = setInterval(()=>{
+    const intervalUpdate = setInterval(() => {
       getCoins()
     }, coinsUpdateTimeMs)
 
@@ -31,16 +32,25 @@ const HomePage: React.FC<TStateProps & TDispatchProps> = ({ coins, getCoins, isF
   }, []) // eslint-disable-line
 
   return (
-    <section className="coins mt-4">
-      {isFetching && !coins.length
-        ? <Loader />
-        : <>
-          {coins.length
-            ? <TopCoinsTable coins={coins} />
-            : <p>no items</p>
-          }
-        </>
-      }
+    <section className="coins">
+      <div className="container">
+        <div className="row">
+          <div className="col-md-8">
+            {isFetching && !coins.length
+              ? <Loader />
+              : <>
+                {coins.length &&
+                  <TopCoinsTable coins={coins} />
+                }
+              </>
+            }
+          </div>
+          <div className="col-md-4">
+            <CurrencyConverter />
+          </div>
+        </div>
+      </div>
+
     </section>
   );
 }

@@ -8,5 +8,11 @@ export default {
     return axios.get(url).then(({ data }) => data).catch(e => {
       console.error(e)
     })
+  },
+  getCoinsBaseInfo: (limit: number = 100, targetCoinCode: TCoinCode) => {
+    const url = `${BASE_URL}top/volumes?extraParams=https:%2F%2Fwww.cryptocompare.com&limit=${limit}&tsym=${targetCoinCode}`
+    return axios.get(url).then(({ data }) => data).catch(e => {
+      console.error(e)
+    })
   }
 }

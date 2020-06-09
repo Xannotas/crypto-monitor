@@ -3,7 +3,7 @@ import { RouteComponentProps, Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 
 import { TRootState } from '../../store'
-import { getCoinInfo } from '../../store/coinInfo/actions'
+import { getCoinInfo, resetCoinInfo } from '../../store/coinInfo/actions'
 import { TCoinCode, TCoinFullInfo } from '../../types'
 import { currencies } from '../../constants'
 import { isFetchingSelector, coinInfoSelector } from '../../store/coinInfo/selectors'
@@ -15,12 +15,13 @@ type TMapState = {
   isFetching: boolean
 }
 type TMapDispatch = {
-  getCoinInfo: (coinCode: TCoinCode) => void
+  getCoinInfo: (coinCode: TCoinCode) => void,
+  resetCoinInfo: () => void
 }
 
 type TProps = RouteComponentProps & TMapState & TMapDispatch
 
-const CoinPage: React.FC<TProps> = ({ match, getCoinInfo, isFetching, coinInfo }) => {
+const CoinPage: React.FC<TProps> = ({ match, getCoinInfo, resetCoinInfo, isFetching, coinInfo }) => {
   // @ts-ignore
   const coinCode: TCoinCode = match.params.code.toUpperCase()
 
@@ -30,6 +31,9 @@ const CoinPage: React.FC<TProps> = ({ match, getCoinInfo, isFetching, coinInfo }
     if (validCoinCode) {
       getCoinInfo(coinCode)
     }
+    return () => {
+      resetCoinInfo()
+    }
   }, [coinCode]) // eslint-disable-line
 
   if (!validCoinCode) {
@@ -38,17 +42,19 @@ const CoinPage: React.FC<TProps> = ({ match, getCoinInfo, isFetching, coinInfo }
 
   return (
     <div className='coin'>
-      {isFetching
-        ? <Loader />
-        : <>
-          {coinInfo &&
-            <div className="coin-content">
-              <h2>{coinInfo.fullName}</h2>
-              <h3>{coinInfo.name}</h3>
-            </div>
-          }
-        </>
-      }
+      <div className="container">
+        {isFetching
+          ? <Loader />
+          : <>
+            {coinInfo &&
+              <div className="coin-content">
+                <h2>{coinInfo.name}</h2>
+                <h3>{coinInfo.code}</h3>
+              </div>
+            }
+          </>
+        }
+      </div>
     </div>
   )
 }
@@ -60,4 +66,4 @@ const mapState = (state: TRootState): TMapState => {
   }
 }
 
-export default connect<TMapState, TMapDispatch, {}, TRootState>(mapState, { getCoinInfo })(CoinPage)
+export default connect<TMapState, TMapDispatch, {}, TRootState>(mapState, { getCoinInfo, resetCoinInfo })(CoinPage)

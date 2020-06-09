@@ -1,3 +1,4 @@
+import { TRootState } from './../../index';
 import { imagesUrlServer } from './../../../constants';
 import { TCoinInfo } from './../../../types';
 import { Dispatch } from 'redux'
@@ -26,18 +27,23 @@ const getCoinsSuccess = (payload: TCoinInfo[]): TGetCoinsSuccess => ({
   payload
 })
 
-export const getCoins = () => async (dispatch: Dispatch) => {
+export const getCoins = () => async (dispatch: Dispatch, getState: ()=>TRootState) => {
   dispatch(getCoinsRequest())
 
   try {
-    const response = await api.toplists.getTopListByMarketCap()
+    const targetCoinCode = getState().coinInfo.targetCoinCode
+    const limit = 10
+
+    const response = await api.toplists.getTopListByTierVolume(limit, targetCoinCode)
     const data = response.Data as any[]
 
     if (response.Type === 100) {
       const coins: TCoinInfo[] = data.map(coin => ({
-        name: coin.CoinInfo.Name,
-        fullName: coin.CoinInfo.FullName,
+        code: coin.CoinInfo.Name,
+        name: coin.CoinInfo.FullName,
         price: coin.DISPLAY.USD.PRICE,
+        directVol: coin.DISPLAY.USD.VOLUME24HOURTO.replace(/[,]/gi, ' ').split('.')[0],
+        totalVol: coin.DISPLAY.USD.TOTALVOLUME24HTO,
         mktcap: coin.DISPLAY.USD.MKTCAP,
         imageUrl: imagesUrlServer + coin.CoinInfo.ImageUrl
       }))
