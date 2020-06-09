@@ -1,9 +1,9 @@
 import { TActions } from './../actions';
-// import { TCoinCode } from './../../../types';
+import { TCoinCode } from './../../../types';
 
 const initialState = {
-  // currencyCode: 'BTC' as TCoinCode,
-  // targetCurrencyCode: 'USD' as TCoinCode,
+  currencyCode: 'BTC' as TCoinCode,
+  currencyTargetCode: 'USD' as TCoinCode,
   price: 0 as number,
 
   isFetching: false as boolean,
@@ -33,7 +33,9 @@ const currencyConverterReducer = (state = initialState, action: TActions) : TRed
       return {
         ...state,
         isFetching: false,
-        price: action.payload
+        price: action.payload.price,
+        currencyCode: action.payload.currencyCode,
+        currencyTargetCode: action.payload.currencyTargetCode
       }
     }
 

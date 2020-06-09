@@ -4,45 +4,44 @@ import { connect } from 'react-redux'
 import './currencyConverter.scss'
 import { TCoinCode } from '../../types'
 import { TRootState } from '../../store'
-import { priceSelector, isFetchingSelector } from '../../store/currencyConverter/selectors'
+import { priceSelector, isFetchingSelector, currencyCodeSelector, currencyTargetCodeSelector } from '../../store/currencyConverter/selectors'
 import { getPrice } from '../../store/currencyConverter/actions'
 
 import CurrencyConverterForm from '../../components/CurrencyConverterForm'
+import Loader from '../../components/Loader'
 
 type TMapState = {
   price: number,
-  isFetching: boolean
+  isFetching: boolean,
+  currencyCode: TCoinCode,
+  currencyTargetCode: TCoinCode,
 }
 
 type TMapDispatch = {
-  getPrice: (currency: TCoinCode, targetCurrency: TCoinCode) => void
+  getPrice: (currencyCode: TCoinCode, currencyTargetCode: TCoinCode) => void
 }
 
 type TProps = TMapState & TMapDispatch
 
-const CurrencyConverter: React.FC<TProps> = ({ price, getPrice, isFetching }) => {
-  const defaultCurrency: TCoinCode = 'BTC'
-  const defaultTargetCurrency: TCoinCode = 'USD'
-  const onCurrencyChange = (currency: TCoinCode, targetCurrency: TCoinCode) => {
-    getPrice(currency, targetCurrency)
-  }
+const CurrencyConverter: React.FC<TProps> = ({ price, getPrice, isFetching, currencyCode, currencyTargetCode }) => {
 
   useEffect(() => {
-    getPrice(defaultCurrency, defaultTargetCurrency)
+    getPrice(currencyCode, currencyTargetCode)
   }, [])  // eslint-disable-line
 
   return (
     <div className='currency-converter'>
-      <h5>Currency converter
+      <div className='d-flex justify-content-between'>
+        <span className='h5'>Currency converter</span>
         {isFetching &&
-          <span className="spinner-border spinner-border-sm ml-2" role="status" aria-hidden="true"></span>
+          <Loader className='d-inline align-text-top' small={true} center={false} />
         }
-      </h5>
+      </div>
       <CurrencyConverterForm
         price={price}
-        onCurrencyChange={onCurrencyChange}
-        defaultCurrency={defaultCurrency}
-        defaultTargetCurrency={defaultTargetCurrency}
+        currencyCode={currencyCode}
+        currencyTargetCode={currencyTargetCode}
+        getPrice={getPrice}
       />
     </div>
   )
@@ -51,6 +50,8 @@ const CurrencyConverter: React.FC<TProps> = ({ price, getPrice, isFetching }) =>
 const mapState = (state: TRootState): TMapState => ({
   price: priceSelector(state),
   isFetching: isFetchingSelector(state),
+  currencyCode: currencyCodeSelector(state),
+  currencyTargetCode: currencyTargetCodeSelector(state),
 })
 
 export default connect<TMapState, TMapDispatch, {}, TRootState>(mapState, { getPrice })(CurrencyConverter)

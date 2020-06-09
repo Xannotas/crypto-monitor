@@ -3,13 +3,15 @@ import classNames from 'classnames'
 
 type TProps = {
   className?: string
-  center?: boolean
+  center?: boolean,
+  small?: boolean
 }
 
-const Loader: React.FC<TProps> = ({ className, center = true }) => {
+const Loader: React.FC<TProps> = ({ className, center = true, small = false }) => {
   return (
-    <div className={classNames({"d-flex justify-content-center" : center}, className)}>
-      <div className="spinner-border" role="status">
+    <div className={classNames('loader', { "d-flex justify-content-center": center }, className)}>
+
+      <div className={classNames("spinner-border", { 'spinner-border-sm': small })} role="status">
         <span className="sr-only">Loading...</span>
       </div>
     </div>

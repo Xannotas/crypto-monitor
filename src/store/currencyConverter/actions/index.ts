@@ -17,8 +17,13 @@ const getPriceFailure = (error: string): TGetPriceFailure => ({
   payload: error
 })
 
-type TGetPriceSuccess = { type: typeof GET_PRICE_SUCCESS, payload: number }
-const getPriceSuccess = (payload: number):TGetPriceSuccess => ({
+type TGetPriceSuccess = { type: typeof GET_PRICE_SUCCESS, payload: TGetPriceSuccessPayload }
+type TGetPriceSuccessPayload = {
+  price: number,
+  currencyCode: TCoinCode,
+  currencyTargetCode: TCoinCode,
+}
+const getPriceSuccess = (payload: TGetPriceSuccessPayload): TGetPriceSuccess => ({
   type: GET_PRICE_SUCCESS,
   payload
 })
@@ -31,9 +36,13 @@ export const getPrice = (currency: TCoinCode, targetCurrency: TCoinCode) => asyn
   try {
     const response = await api.prices.getPrice(currency, targetCurrency)
     const data: number = response[targetCurrency]
-    
+
     if (data) {
-      dispatch(getPriceSuccess(data))
+      dispatch(getPriceSuccess({
+        price: data,
+        currencyCode: currency,
+        currencyTargetCode: targetCurrency
+      }))
     } else {
       getPriceFailure('Cannot load data from server.')
     }
