@@ -43,6 +43,9 @@ const CurrencyConverter: React.FC<TProps> = ({ price, getPrice, isFetching, curr
         currencyTargetCode={currencyTargetCode}
         getPrice={getPrice}
       />
+      <div className="currency-converter__price mt-2">
+        {`1 ${currencyCode} = ${price} ${currencyTargetCode}`}
+      </div>
     </div>
   )
 }

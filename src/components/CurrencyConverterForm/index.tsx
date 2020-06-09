@@ -24,12 +24,12 @@ const CurrencyConverterForm: React.FC<TProps> = ({ price, getPrice, currencyCode
 
   const changeFirstInput = (newValue: string) => {
     setFirstFieldValue(newValue)
-    setSecondFieldValue((+newValue * price).toFixed(8).toString())
+    setSecondFieldValue((+newValue * price).toString())
   }
 
   const changeTargetInput = (newValue: string) => {
     setSecondFieldValue(newValue)
-    setFirstFieldValue(newValue === '0' ? '0' : (+newValue / price).toFixed(8).toString())
+    setFirstFieldValue(newValue === '0' ? '0' : (+newValue / price).toString())
   }
 
   useEffect(() => {
