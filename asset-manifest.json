@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/crypto-monitor/static/css/main.7276da16.chunk.css",
-    "main.js": "/crypto-monitor/static/js/main.91e9f596.chunk.js",
-    "main.js.map": "/crypto-monitor/static/js/main.91e9f596.chunk.js.map",
+    "main.js": "/crypto-monitor/static/js/main.1d2f1f58.chunk.js",
+    "main.js.map": "/crypto-monitor/static/js/main.1d2f1f58.chunk.js.map",
     "runtime-main.js": "/crypto-monitor/static/js/runtime-main.8c0c6b53.js",
     "runtime-main.js.map": "/crypto-monitor/static/js/runtime-main.8c0c6b53.js.map",
     "static/css/2.829c9cb5.chunk.css": "/crypto-monitor/static/css/2.829c9cb5.chunk.css",
     "static/js/2.7c420817.chunk.js": "/crypto-monitor/static/js/2.7c420817.chunk.js",
     "static/js/2.7c420817.chunk.js.map": "/crypto-monitor/static/js/2.7c420817.chunk.js.map",
     "index.html": "/crypto-monitor/index.html",
-    "precache-manifest.7bec82dd957eacd74bf0c754ae3644d7.js": "/crypto-monitor/precache-manifest.7bec82dd957eacd74bf0c754ae3644d7.js",
+    "precache-manifest.0f601c6f9ac29fba2f6404192176db00.js": "/crypto-monitor/precache-manifest.0f601c6f9ac29fba2f6404192176db00.js",
     "service-worker.js": "/crypto-monitor/service-worker.js",
     "static/css/2.829c9cb5.chunk.css.map": "/crypto-monitor/static/css/2.829c9cb5.chunk.css.map",
     "static/css/main.7276da16.chunk.css.map": "/crypto-monitor/static/css/main.7276da16.chunk.css.map",
@@ -20,6 +20,6 @@
     "static/css/2.829c9cb5.chunk.css",
     "static/js/2.7c420817.chunk.js",
     "static/css/main.7276da16.chunk.css",
-    "static/js/main.91e9f596.chunk.js"
+    "static/js/main.1d2f1f58.chunk.js"
   ]
 }
