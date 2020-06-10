@@ -18,7 +18,11 @@ const Input: React.FC<TProps> = ({ className, placeholder, value, onChange, type
   const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     let input = e.currentTarget.value
     if (valueType === 'number') {
-      input = input.replace(/[^.\d]+/g, "").replace(/^([^\.]*\.)|\./g, '$1') // eslint-disable-line
+      input = input
+        .replace(/[^.\d]+/g, "")
+        .replace(/^0{2}/g, '0')
+        .replace(/^0{1}\d+/g, input.slice(-1))
+        .replace(/^([^.]*\.)|\./g, '$1')
     }
     onChange(input)
   }
