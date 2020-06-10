@@ -34,11 +34,12 @@ export const getCoins = () => async (dispatch: Dispatch, getState: ()=>TRootStat
     const targetCoinCode = getState().coinInfo.targetCoinCode
     const limit = 10
 
-    const response = await api.toplists.getTopListByTierVolume(limit, targetCoinCode)
-    const data = response.Data as any[]
+    const response: any = await api.toplists.getTopListByTierVolume(limit, targetCoinCode)
+    const data = response.data
+    const resCoins: any[] = data.Data
 
-    if (response.Type === 100) {
-      const coins: TCoinInfo[] = data.map(coin => ({
+    if (data.Message === 'Success') {
+      const coins: TCoinInfo[] = resCoins.map(coin => ({
         code: coin.CoinInfo.Name,
         name: coin.CoinInfo.FullName,
         price: coin.DISPLAY.USD.PRICE,
@@ -50,10 +51,10 @@ export const getCoins = () => async (dispatch: Dispatch, getState: ()=>TRootStat
 
       dispatch(getCoinsSuccess(coins))
     } else {
-      getCoinsFailure('Cannot load data from server.')
+      dispatch(getCoinsFailure('Cannot load data from server.'))
     }
   } catch (e) {
-    getCoinsFailure(e)
+    dispatch(getCoinsFailure(e))
   }
 }
 

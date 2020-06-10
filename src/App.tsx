@@ -20,12 +20,14 @@ const App: React.FC<TMapState> = ({ targetCoinCode }) => {
 
   useEffect(() => {
     try {
-      api.coinInfo.getCoinsBaseInfo(100, targetCoinCode).then(res => {
-        const coinsEntries = res.Data.map((row: any) => [row.SYMBOL, row.NAME])
-        const currencies = Object.fromEntries(coinsEntries)
+      api.coinInfo.getCoinsBaseInfo(100, targetCoinCode).then(({ data }: any) => {
+        if (data.Response === "Success") {
+          const coinsEntries = data.Data.map((row: any) => [row.SYMBOL, row.NAME])
+          const currencies = Object.fromEntries(coinsEntries)
 
-        if (currencies) {
-          setCurrencies(currencies)
+          if (currencies) {
+            setCurrencies(currencies)
+          }
         }
       })
     } catch (e) {

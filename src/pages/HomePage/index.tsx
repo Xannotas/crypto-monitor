@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { TRootState } from '../../store';
 import { TCoinInfo } from '../../types';
 import { getCoins } from '../../store/topCoinsList/actions'
-import { coinsSelector, isFetchingSelector } from '../../store/topCoinsList/selectors';
+import { coinsSelector, isFetchingSelector, errorSelector } from '../../store/topCoinsList/selectors';
 
 import TopCoinsTable from '../../components/TopCoinsTable';
 import Loader from '../../components/Loader';
@@ -12,13 +12,14 @@ import CurrencyConverter from '../../containers/CurrencyConverter';
 
 type TStateProps = {
   coins: TCoinInfo[],
-  isFetching: boolean
+  isFetching: boolean,
+  error: string
 }
 type TDispatchProps = {
   getCoins: () => void
 }
 
-const HomePage: React.FC<TStateProps & TDispatchProps> = ({ coins, getCoins, isFetching }) => {
+const HomePage: React.FC<TStateProps & TDispatchProps> = ({ coins, getCoins, isFetching, error }) => {
   const coinsUpdateTimeMs = 130 * 1000
   useEffect(() => {
     getCoins()
@@ -36,7 +37,7 @@ const HomePage: React.FC<TStateProps & TDispatchProps> = ({ coins, getCoins, isF
       <div className="container">
         <div className="row">
           <div className="col-md-8">
-            {isFetching && !coins.length
+            {isFetching && !coins.length && !error
               ? <Loader />
               : <>
                 {coins.length &&
@@ -55,9 +56,10 @@ const HomePage: React.FC<TStateProps & TDispatchProps> = ({ coins, getCoins, isF
   );
 }
 
-const mapState = (state: TRootState) => ({
+const mapState = (state: TRootState): TStateProps => ({
   coins: coinsSelector(state),
-  isFetching: isFetchingSelector(state)
+  isFetching: isFetchingSelector(state),
+  error: errorSelector(state)
 })
 
 export default connect<TStateProps, TDispatchProps, {}, TRootState>(mapState, { getCoins })(HomePage);

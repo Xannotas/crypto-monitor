@@ -38,11 +38,13 @@ export type TActions = TGetCoinInfoRequest | TGetCoinInfoSuccess | TGetCoinInfoF
 export const getCoinInfo = (coinCode: TCoinCode) => async (dispatch: Dispatch, getState: () => TRootState) => {
   dispatch(getCoinInfoRequest())
   try {
-    const targetCoinCode : TCoinCode= getState().coinInfo.targetCoinCode
-    const response = await api.coinInfo.getCoinInfo(coinCode,targetCoinCode)
-    const raw = response.RAW[coinCode][targetCoinCode]
-    const display = response.DISPLAY[coinCode][targetCoinCode]
-    
+    const targetCoinCode: TCoinCode = getState().coinInfo.targetCoinCode
+    const response: any = await api.coinInfo.getCoinInfo(coinCode, targetCoinCode)
+    const data = response.data
+
+    const raw = data.RAW[coinCode][targetCoinCode]
+    const display = data.DISPLAY[coinCode][targetCoinCode]
+
     if (response.Response !== 'Error') {
       const data: TCoinFullInfo = {
         code: coinCode,
@@ -57,10 +59,10 @@ export const getCoinInfo = (coinCode: TCoinCode) => async (dispatch: Dispatch, g
       }
       dispatch(getCoinInfoSuccess(data))
     } else {
-      getCoinInfoFailure('err')
+      dispatch(getCoinInfoFailure('err'))
     }
 
   } catch (e) {
-    getCoinInfoFailure(e)
+    dispatch(getCoinInfoFailure(e))
   }
 }

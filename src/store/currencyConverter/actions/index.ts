@@ -34,8 +34,8 @@ export const getPrice = (currency: TCoinCode, targetCurrency: TCoinCode) => asyn
   dispatch(getPriceRequest())
 
   try {
-    const response = await api.prices.getPrice(currency, targetCurrency)
-    const data: number = response[targetCurrency]
+    const response: any = await api.prices.getPrice(currency, targetCurrency)
+    const data: number = response.data[targetCurrency]
 
     if (data) {
       dispatch(getPriceSuccess({
@@ -44,9 +44,9 @@ export const getPrice = (currency: TCoinCode, targetCurrency: TCoinCode) => asyn
         currencyTargetCode: targetCurrency
       }))
     } else {
-      getPriceFailure('Cannot load data from server.')
+      dispatch(getPriceFailure('Cannot load data from server.'))
     }
   } catch (e) {
-    getPriceFailure(e)
+    dispatch(getPriceFailure(e))
   }
 }

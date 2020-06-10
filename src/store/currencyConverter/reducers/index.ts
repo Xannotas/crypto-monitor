@@ -24,7 +24,7 @@ const currencyConverterReducer = (state = initialState, action: TActions) : TRed
     case 'CURRENCY_CONVERTER/GET_PRICE:FAILURE': {
       return {
         ...state,
-        isFetching: true,
+        isFetching: false,
         _error: action.payload
       }
     }
