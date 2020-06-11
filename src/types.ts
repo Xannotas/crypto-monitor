@@ -13,6 +13,11 @@ export type TCoinInfo = {
 }
 
 export type TCoinFullInfo = TCoinInfo & {
+  toSymbol: string,
+  toCode: string,
   changePercent24Hour: string,
   change24Hour: string,
+  low24Hour: string,
+  high24Hour: string,
+  supply: string,
 }

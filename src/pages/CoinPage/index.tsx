@@ -47,8 +47,8 @@ const CoinPage: React.FC<TProps> = ({ match, getCoinInfo, resetCoinInfo, isFetch
         {isFetching
           ? <Loader />
           : <>
-            {coinInfo &&
-              <CoinInfo coinInfo={coinInfo}/>
+            {Object.keys(coinInfo).length &&
+              <CoinInfo coinInfo={coinInfo} />
             }
           </>
         }

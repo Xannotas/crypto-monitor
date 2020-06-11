@@ -11,12 +11,26 @@ type TProps = {
 const CoinInfo: React.FC<TProps> = ({ coinInfo }) => {
   const priceDown = coinInfo.changePercent24Hour && coinInfo.changePercent24Hour[0] === '-' ? true : false
 
+  const formatCost = (cost: string) => {
+    const res = `${coinInfo.toSymbol !== coinInfo.toCode && coinInfo.toSymbol}
+    ${cost.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}
+    ${coinInfo.toCode}`
+    return res
+  }
+
+  const toFixed = (text: string, length: number = 2, symb: string = '.') => {
+    const splitedText = text.toString().split(symb) || ''
+    if (splitedText[1] && length > 0) {
+      return `${splitedText[0]}.${splitedText[1].slice(0, length)}`
+    }
+    return splitedText[0]
+  }
+
   return (
     <div className="coin-info">
       <h3 className="coin-info__title">{coinInfo.name} <small>({coinInfo.code})</small></h3>
 
       <div className="coin-info-price">
-
         <div className='coin-info__logo'>
           <img src={coinInfo.imageUrl} alt={coinInfo.code} />
         </div>
@@ -43,6 +57,26 @@ const CoinInfo: React.FC<TProps> = ({ coinInfo }) => {
 
       </div>
 
+      <table className="table mt-3">
+        <thead className='thead-dark'>
+          <tr>
+            <th scope="col">MARKET CAP</th>
+            <th scope="col">24H VOLUME</th>
+            <th scope="col">Low/High 24h</th>
+            <th scope="col">Circulating Supply</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{formatCost(toFixed(coinInfo.mktcap, 0))}</td>
+            <td>{formatCost(toFixed(coinInfo.directVol, 0))}</td>
+            <td>
+              {formatCost(`${toFixed(coinInfo.low24Hour, 3)} / ${toFixed(coinInfo.high24Hour, 3)}`)}
+            </td>
+            <td>{formatCost(toFixed(coinInfo.supply, 0))}</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   )
 }

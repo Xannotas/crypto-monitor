@@ -49,13 +49,20 @@ export const getCoinInfo = (coinCode: TCoinCode) => async (dispatch: Dispatch, g
       const data: TCoinFullInfo = {
         code: coinCode,
         name: currencies[coinCode],
+        imageUrl: imagesUrlServer + raw.IMAGEURL,
+        toSymbol: display.TOSYMBOL,
+        toCode: raw.TOSYMBOL,
+
         price: display.PRICE,
         mktcap: raw.MKTCAP,
-        directVol: raw.VOLUME24HOUR,
+        supply: raw.SUPPLY,
+        directVol: raw.VOLUME24HOURTO,
         totalVol: raw.TOTALVOLUME24H,
-        imageUrl: imagesUrlServer + raw.IMAGEURL,
+
         changePercent24Hour: display.CHANGEPCT24HOUR,
         change24Hour: display.CHANGE24HOUR,
+        low24Hour: raw.LOW24HOUR,
+        high24Hour: raw.HIGH24HOUR,
       }
       dispatch(getCoinInfoSuccess(data))
     } else {
