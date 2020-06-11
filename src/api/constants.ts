@@ -1,2 +1,5 @@
-export const BASE_URL = 'https://min-api.cryptocompare.com/data/'
-export const BASE_URL_v2 = 'https://min-api.cryptocompare.com/data/v2/'
+import axios from 'axios'
+
+export const instance = axios.create({
+  baseURL: 'https://min-api.cryptocompare.com/data/'
+})
