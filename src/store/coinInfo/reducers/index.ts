@@ -1,11 +1,15 @@
 import { TActions } from './../actions';
-import { TCoinFullInfo, TCoinCode } from './../../../types';
+import { TCoinFullInfo, TCoinCode, TCoinHistoryMode, TCoinHistroryDataElement } from './../../../types';
 
 const initialState = {
   coinInfo: {} as TCoinFullInfo,
+  coinHistory: [] as TCoinHistroryDataElement[],
+  historyMode: '1d' as TCoinHistoryMode,
   targetCoinCode: 'USD' as TCoinCode,
 
   isFetching: false as boolean,
+  isHistoryFetching: false as boolean,
+  _historyError: '' as string,
   _error: '' as string
 }
 
@@ -34,6 +38,29 @@ const CoinInfoReducer = (state = initialState, action: TActions): TReducerState 
     case 'COIN_INFO/RESET' : return {
       ...state,
       coinInfo: {} as TCoinFullInfo
+    }
+
+    case 'COIN_HISTORY/LOAD:REQUEST': return {
+      ...state,
+      isHistoryFetching: true
+    }
+
+    case 'COIN_HISTORY/LOAD:FAILURE': return {
+      ...state,
+      isHistoryFetching: false,
+      _historyError: action.payload
+    }
+
+    case 'COIN_HISTORY/LOAD:SUCCESS': return {
+      ...state,
+      coinHistory: action.payload,
+      isHistoryFetching: false,
+      _historyError: ''
+    }
+
+    case 'COIN_HISTORY/MODE:CHANGE' : return {
+      ...state,
+      historyMode: action.payload
     }
 
     default: return state

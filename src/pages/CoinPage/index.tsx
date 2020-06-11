@@ -2,14 +2,14 @@ import React, { useEffect } from 'react'
 import { RouteComponentProps, Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 
+import { currencies } from '../../constants'
+import { TCoinCode, TCoinFullInfo } from '../../types'
 import { TRootState } from '../../store'
 import { getCoinInfo, resetCoinInfo } from '../../store/coinInfo/actions'
-import { TCoinCode, TCoinFullInfo } from '../../types'
-import { currencies } from '../../constants'
 import { isFetchingSelector, coinInfoSelector } from '../../store/coinInfo/selectors'
 
 import Loader from '../../components/Loader'
-import CoinInfo from '../../components/CoinInfo'
+import CoinInfo from '../../containers/CoinInfo'
 
 type TMapState = {
   coinInfo: TCoinFullInfo,
@@ -22,10 +22,11 @@ type TMapDispatch = {
 
 type TProps = RouteComponentProps & TMapState & TMapDispatch
 
-const CoinPage: React.FC<TProps> = ({ match, getCoinInfo, resetCoinInfo, isFetching, coinInfo }) => {
+const CoinPage: React.FC<TProps> = ({ match, getCoinInfo, resetCoinInfo,
+  isFetching, coinInfo }) => {
+
   // @ts-ignore
   const coinCode: TCoinCode = match.params.code.toUpperCase()
-
   const validCoinCode = currencies[coinCode]
 
   useEffect(() => {
@@ -48,7 +49,7 @@ const CoinPage: React.FC<TProps> = ({ match, getCoinInfo, resetCoinInfo, isFetch
           ? <Loader />
           : <>
             {Object.keys(coinInfo).length &&
-              <CoinInfo coinInfo={coinInfo} />
+              <CoinInfo coinInfo={coinInfo}/>
             }
           </>
         }

@@ -31,4 +31,14 @@
       }
     }
   }
+
+  &-rechart {
+    &.fetching {
+      min-height: 300px;
+      background: #eee;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
 }

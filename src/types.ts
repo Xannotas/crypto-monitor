@@ -21,3 +21,10 @@ export type TCoinFullInfo = TCoinInfo & {
   high24Hour: string,
   supply: string,
 }
+
+export type TCoinHistoryMode = '1h' | '1d' | '1w' | '1m' | '3m' | '6m' | '1y' | '3y'
+
+export type TCoinHistroryDataElement = {
+  title: string,
+  price: number
+}
