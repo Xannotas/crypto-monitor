@@ -1,25 +1,25 @@
 {
   "files": {
-    "main.css": "/crypto-monitor/static/css/main.7276da16.chunk.css",
-    "main.js": "/crypto-monitor/static/js/main.a5cf875f.chunk.js",
-    "main.js.map": "/crypto-monitor/static/js/main.a5cf875f.chunk.js.map",
+    "main.css": "/crypto-monitor/static/css/main.fac8bb2e.chunk.css",
+    "main.js": "/crypto-monitor/static/js/main.2af4ca38.chunk.js",
+    "main.js.map": "/crypto-monitor/static/js/main.2af4ca38.chunk.js.map",
     "runtime-main.js": "/crypto-monitor/static/js/runtime-main.8c0c6b53.js",
     "runtime-main.js.map": "/crypto-monitor/static/js/runtime-main.8c0c6b53.js.map",
     "static/css/2.829c9cb5.chunk.css": "/crypto-monitor/static/css/2.829c9cb5.chunk.css",
-    "static/js/2.b1cf57c3.chunk.js": "/crypto-monitor/static/js/2.b1cf57c3.chunk.js",
-    "static/js/2.b1cf57c3.chunk.js.map": "/crypto-monitor/static/js/2.b1cf57c3.chunk.js.map",
+    "static/js/2.08caad5d.chunk.js": "/crypto-monitor/static/js/2.08caad5d.chunk.js",
+    "static/js/2.08caad5d.chunk.js.map": "/crypto-monitor/static/js/2.08caad5d.chunk.js.map",
     "index.html": "/crypto-monitor/index.html",
-    "precache-manifest.3d240d0fd0cc7e484e489791e43f390c.js": "/crypto-monitor/precache-manifest.3d240d0fd0cc7e484e489791e43f390c.js",
+    "precache-manifest.57ef0c278e0d8f140171253a3ff4aa82.js": "/crypto-monitor/precache-manifest.57ef0c278e0d8f140171253a3ff4aa82.js",
     "service-worker.js": "/crypto-monitor/service-worker.js",
     "static/css/2.829c9cb5.chunk.css.map": "/crypto-monitor/static/css/2.829c9cb5.chunk.css.map",
-    "static/css/main.7276da16.chunk.css.map": "/crypto-monitor/static/css/main.7276da16.chunk.css.map",
-    "static/js/2.b1cf57c3.chunk.js.LICENSE.txt": "/crypto-monitor/static/js/2.b1cf57c3.chunk.js.LICENSE.txt"
+    "static/css/main.fac8bb2e.chunk.css.map": "/crypto-monitor/static/css/main.fac8bb2e.chunk.css.map",
+    "static/js/2.08caad5d.chunk.js.LICENSE.txt": "/crypto-monitor/static/js/2.08caad5d.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.8c0c6b53.js",
     "static/css/2.829c9cb5.chunk.css",
-    "static/js/2.b1cf57c3.chunk.js",
-    "static/css/main.7276da16.chunk.css",
-    "static/js/main.a5cf875f.chunk.js"
+    "static/js/2.08caad5d.chunk.js",
+    "static/css/main.fac8bb2e.chunk.css",
+    "static/js/main.2af4ca38.chunk.js"
   ]
 }
