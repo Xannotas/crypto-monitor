@@ -8,6 +8,7 @@ import { isHistoryFetchingSelector, coinHistorySelector, historyModeSelector } f
 import { changeHistoryMode, getCoinHistory } from '../../store/coinInfo/actions'
 import CoinChart from '../../components/CoinChart'
 import CoinDetailInfo from '../../components/CoinDetailInfo'
+import CoinHeadInfo from '../../components/CoinHeadInfo'
 
 type TOwnProps = {
   coinInfo: TCoinFullInfo
@@ -36,15 +37,17 @@ const CoinInfo: React.FC<TProps> = ({ coinInfo, coinHistory, isHistoryFetching, 
 
   return (
     <div className="coin-info">
-      <h3 className="coin-info__title">{coinInfo.name} <small>({coinInfo.code})</small></h3>
+      <CoinHeadInfo coinInfo={coinInfo} />
 
-      <CoinDetailInfo coinInfo={coinInfo}/>
+      <CoinDetailInfo coinInfo={coinInfo} />
 
       <CoinChart data={coinHistory}
         historyMode={historyMode}
         prices={prices}
         isFetching={isHistoryFetching}
         changeHistoryMode={changeHistoryMode}
+        toSymbol={coinInfo.toSymbol}
+        toCode={coinInfo.toCode}
       />
     </div>
   )

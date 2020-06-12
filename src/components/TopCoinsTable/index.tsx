@@ -12,7 +12,7 @@ const TopCoinsTable: React.FC<TProps> = ({ coins }) => (
   <div className="top-coins">
     <h2>Top 10 crypto currency</h2>
 
-    <table className="table top-coins-table">
+    <table className="table table-responsive top-coins-table">
       <thead>
         <tr>
           <th scope="col-2">#</th>

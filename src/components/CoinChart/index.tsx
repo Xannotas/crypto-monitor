@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { PropsWithChildren } from 'react'
 import classNames from 'classnames'
 import {
   AreaChart, Area, XAxis, YAxis, Tooltip, ResponsiveContainer
@@ -6,18 +6,20 @@ import {
 
 import './coinChart.scss'
 import Loader from '../../components/Loader';
-import { TCoinHistoryMode } from '../../utils/types';
-import { toRoundValue } from '../../utils/helpers';
+import { TCoinHistoryMode, TCoinCode } from '../../utils/types';
+import { toRoundValue, formatCost } from '../../utils/helpers';
 
 type TProps = {
   prices: number[],
   isFetching: boolean,
   data: any[],
+  toSymbol: string,
+  toCode: TCoinCode,
 
   historyMode: TCoinHistoryMode,
   changeHistoryMode: (mode: TCoinHistoryMode) => void
 }
-const CoinChart: React.FC<TProps> = ({ prices, isFetching, changeHistoryMode, data, historyMode }) => {
+const CoinChart: React.FC<TProps> = ({ prices, isFetching, changeHistoryMode, data, historyMode, toSymbol, toCode }) => {
   const navItemValues = {
     '1h': '1 hour',
     '1d': '1 day',
@@ -32,6 +34,26 @@ const CoinChart: React.FC<TProps> = ({ prices, isFetching, changeHistoryMode, da
   const priceRange = {
     'min': Math.min(...prices),
     'max': Math.max(...prices)
+  }
+
+  type TRenderTooltipContentProps = {
+    payload: PropsWithChildren<TRenderTooltipContentProps>[]
+  }
+  const renderTooltipContent: React.FC<TRenderTooltipContentProps> = ({ payload }) => {
+    return (
+      <div className="customized-tooltip-content">
+        <p className="total">{`${payload.length && (payload[0].payload as any).fullDate}`}</p>
+        <ul className="list">
+          {
+            payload.map((entry: any, index) => (
+              <li key={`item-${index}`} style={{ color: entry.color }}>
+                {`${entry.name} : ${formatCost(entry.value, toSymbol, toCode)}`}
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    )
   }
 
   return (
@@ -53,16 +75,16 @@ const CoinChart: React.FC<TProps> = ({ prices, isFetching, changeHistoryMode, da
           </div>
 
           <div className="coin-info-rechart__content">
-            <ResponsiveContainer width='100%' height={300}>
+            <ResponsiveContainer width='100%' height='50%' minWidth='800px' minHeight='300px'>
               <AreaChart
                 data={data}
                 margin={{
                   top: 10, right: 30, left: 0, bottom: 0,
                 }}
               >
-                <XAxis dataKey="title" />
+                <XAxis dataKey='formatedDate' minTickGap={20} />
                 <YAxis domain={[toRoundValue(priceRange.min - 100), toRoundValue(priceRange.max + 100)]} />
-                <Tooltip />
+                <Tooltip content={renderTooltipContent} />
                 <Area type="monotone" dataKey="price" stroke="#82bcf3" fill="#cce6ff" />
               </AreaChart>
             </ResponsiveContainer>

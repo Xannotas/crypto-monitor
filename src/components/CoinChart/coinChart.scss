@@ -1,11 +1,65 @@
-.coin-info {
-  &-rechart {
-    &.fetching {
-      min-height: 300px;
-      background: #f8f8f8;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+.coin-info-rechart {
+  margin: 10px 0;
+
+  &.fetching {
+    min-height: 300px;
+    background: #f8f8f8;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__content {
+    border: 1px solid;
+    border-color: #fff #dee2e6 #dee2e6;
+    padding: 5px;
+    overflow: auto;
+
+    .customized-tooltip-content {
+      background: #fff;
+      border: 2px solid #e2e2e2;
+      padding: 15px;
+
+      p {
+        margin: 0;
+      }
+
+      ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+      }
+    }
+  }
+
+  &__controll {
+    .nav {
+      &-link {
+        border-radius: 5px 5px 0 0;
+      }
+    }
+  }
+}
+
+@media (max-width: 800px) {
+  .coin-info-rechart {
+    &__controll {
+      .nav {
+        &-item {
+          width: 25%;
+        }
+
+        &-link {
+          width: 100%;
+          font-size: 0.8rem;
+          margin-right: 10px;
+          border-radius: 5px;
+
+          &.active {
+            border: 1px solid #00d665;
+          }
+        }
+      }
     }
   }
 }

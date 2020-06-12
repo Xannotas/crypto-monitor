@@ -63,7 +63,7 @@ const getCoinHistoryFailure = (payload: string): TGetCoinHistoryFailure => ({
   payload
 })
 
-type TChangeHistoryMode = {type: typeof COIN_HISTORY_CHANGE_MODE, payload: TCoinHistoryMode}
+type TChangeHistoryMode = { type: typeof COIN_HISTORY_CHANGE_MODE, payload: TCoinHistoryMode }
 export const changeHistoryMode = (payload: TCoinHistoryMode): TChangeHistoryMode => ({
   type: COIN_HISTORY_CHANGE_MODE,
   payload
@@ -121,7 +121,8 @@ export const getCoinHistory = (coinCode: TCoinCode) => async (dispatch: Dispatch
 
     if (response.Response !== 'Error') {
       const history: TCoinHistroryDataElement[] = data.map((row: any) => ({
-        title: formatDate(fromUnixTime(row.time), formatPattern[historyMode] || 'dd.MM.yyyy HH:mm'),
+        formatedDate: formatDate(fromUnixTime(row.time), formatPattern[historyMode] || 'dd.MM.yyyy HH:mm'),
+        fullDate: formatDate(fromUnixTime(row.time), 'dd MMM yyyy HH:mm'),
         price: row.open
       }))
 
@@ -138,11 +139,11 @@ export const getCoinHistory = (coinCode: TCoinCode) => async (dispatch: Dispatch
 const formatPattern = {
   '1h': 'HH:mm',
   '1d': 'HH:mm',
-  '3d': 'dd.MM HH:mm',
-  '1w': 'dd.MM HH:mm',
-  '1m': 'dd.MM.yyyy',
-  '3m': 'dd.MM.yyyy',
-  '6m': 'dd.MM.yyyy',
-  '1y': 'dd.MM.yyyy',
-  '3y': 'dd.MM.yyyy'
+  '3d': 'dd MMM',
+  '1w': 'dd MMM',
+  '1m': 'dd MMM',
+  '3m': 'dd MMM',
+  '6m': 'dd MMM',
+  '1y': 'MMM yy',
+  '3y': 'MMM yy'
 }

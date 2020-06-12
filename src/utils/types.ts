@@ -14,7 +14,7 @@ export type TCoinInfo = {
 
 export type TCoinFullInfo = TCoinInfo & {
   toSymbol: string,
-  toCode: string,
+  toCode: TCoinCode,
   changePercent24Hour: string,
   change24Hour: string,
   low24Hour: string,
@@ -25,6 +25,7 @@ export type TCoinFullInfo = TCoinInfo & {
 export type TCoinHistoryMode = '1h' | '1d' | '1w' | '1m' | '3m' | '6m' | '1y' | '3y'
 
 export type TCoinHistroryDataElement = {
-  title: string,
+  formatedDate: string,
+  fullDate: string,
   price: number
 }

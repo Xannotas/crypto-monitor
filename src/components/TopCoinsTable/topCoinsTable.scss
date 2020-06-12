@@ -17,13 +17,16 @@
   &-table {
     thead tr th {
       &:first-child {
-        width: 40px;
+        max-width: 40px;
       }
     }
 
     tbody tr td,
     tbody tr th {
       vertical-align: inherit;
+      &:not(:first-child) {
+        min-width: 150px;
+      }
     }
   }
 
