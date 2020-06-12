@@ -2,7 +2,7 @@ import { TCoinCode } from '../utils/types';
 import { instance } from './constants';
 
 export default {
-  getTopListByMarketCap: (limit: number = 10, targetCoin: TCoinCode = 'USD') => {
+  getTopListByMarketCap: (limit: number = 10, targetCoin: TCoinCode) => {
     const url = `top/mktcapfull?limit=${limit}&tsym=${targetCoin}`
 
     return instance.get(url)

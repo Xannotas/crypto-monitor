@@ -17,25 +17,25 @@ export type TReducerState = typeof initialState
 
 const CoinInfoReducer = (state = initialState, action: TActions): TReducerState => {
   switch (action.type) {
-    case 'COIN_INFO/LOAD:SUCCESS' : return {
+    case 'COIN_INFO/LOAD:SUCCESS': return {
       ...state,
       coinInfo: action.payload,
       isFetching: false,
       _error: ''
     }
 
-    case 'COIN_INFO/LOAD:FAILURE' : return {
+    case 'COIN_INFO/LOAD:FAILURE': return {
       ...state,
       isFetching: false,
       _error: action.payload
     }
 
-    case 'COIN_INFO/LOAD:REQUEST' : return {
+    case 'COIN_INFO/LOAD:REQUEST': return {
       ...state,
       isFetching: true
     }
 
-    case 'COIN_INFO/RESET' : return {
+    case 'COIN_INFO/RESET': return {
       ...state,
       coinInfo: {} as TCoinFullInfo
     }
@@ -58,9 +58,14 @@ const CoinInfoReducer = (state = initialState, action: TActions): TReducerState 
       _historyError: ''
     }
 
-    case 'COIN_HISTORY/MODE:CHANGE' : return {
+    case 'COIN_HISTORY/MODE:CHANGE': return {
       ...state,
       historyMode: action.payload
+    }
+
+    case 'COIN/TARGET_CODE:SET': return {
+      ...state,
+      targetCoinCode: action.payload
     }
 
     default: return state

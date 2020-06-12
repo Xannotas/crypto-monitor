@@ -17,7 +17,7 @@ type TOwnProps = {
 type TMapState = {
   coinHistory: TCoinHistroryDataElement[],
   historyMode: TCoinHistoryMode,
-  isHistoryFetching: boolean,
+  isHistoryFetching: boolean
 }
 
 type TMapDispatch = {
@@ -27,8 +27,7 @@ type TMapDispatch = {
 
 type TProps = TOwnProps & TMapState & TMapDispatch
 
-const CoinInfo: React.FC<TProps> = ({ coinInfo, coinHistory, isHistoryFetching, historyMode, changeHistoryMode, getCoinHistory }) => {
-
+const CoinInfo: React.FC<TProps> = ({ coinInfo, coinHistory, isHistoryFetching, historyMode, changeHistoryMode, getCoinHistory}) => {
   const prices: number[] = coinHistory.map(row => row.price)
 
   useEffect(() => {

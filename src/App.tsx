@@ -9,8 +9,8 @@ import { targetCoinCodeSelector } from './store/coinInfo/selectors';
 
 import HomePage from './pages/HomePage';
 import CoinPage from './pages/CoinPage';
-import Header from './components/Header';
 import { setCurrencies } from './utils/constants';
+import HeaderCointainer from './containers/HeaderCointainer';
 
 type TMapState = {
   targetCoinCode: TCoinCode
@@ -37,7 +37,7 @@ const App: React.FC<TMapState> = ({ targetCoinCode }) => {
 
   return (
     <div className="App">
-      <Header />
+      <HeaderCointainer />
 
       <Switch>
         <Route exact path='/home' component={HomePage} />

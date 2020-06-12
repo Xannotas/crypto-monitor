@@ -1,3 +1,4 @@
+import { TCoinCode } from './../../../utils/types';
 import { TRootState } from './../../index';
 import { imagesUrlServer } from '../../../utils/constants';
 import { TCoinInfo } from '../../../utils/types';
@@ -27,11 +28,11 @@ const getCoinsSuccess = (payload: TCoinInfo[]): TGetCoinsSuccess => ({
   payload
 })
 
-export const getCoins = () => async (dispatch: Dispatch, getState: ()=>TRootState) => {
+export const getCoins = () => async (dispatch: Dispatch, getState: () => TRootState) => {
   dispatch(getCoinsRequest())
 
   try {
-    const targetCoinCode = getState().coinInfo.targetCoinCode
+    const targetCoinCode: TCoinCode = getState().coinInfo.targetCoinCode
     const limit = 10
 
     const response: any = await api.toplists.getTopListByTierVolume(limit, targetCoinCode)
@@ -42,10 +43,10 @@ export const getCoins = () => async (dispatch: Dispatch, getState: ()=>TRootStat
       const coins: TCoinInfo[] = resCoins.map(coin => ({
         code: coin.CoinInfo.Name,
         name: coin.CoinInfo.FullName,
-        price: coin.DISPLAY.USD.PRICE,
-        directVol: coin.DISPLAY.USD.VOLUME24HOURTO.replace(/[,]/gi, ' ').split('.')[0],
-        totalVol: coin.DISPLAY.USD.TOTALVOLUME24HTO,
-        mktcap: coin.DISPLAY.USD.MKTCAP,
+        price: coin.DISPLAY[targetCoinCode].PRICE,
+        directVol: coin.DISPLAY[targetCoinCode].VOLUME24HOURTO.replace(/[,]/gi, ' ').split('.')[0],
+        totalVol: coin.DISPLAY[targetCoinCode].TOTALVOLUME24HTO,
+        mktcap: coin.DISPLAY[targetCoinCode].MKTCAP,
         imageUrl: imagesUrlServer + coin.CoinInfo.ImageUrl
       }))
 
@@ -54,7 +55,7 @@ export const getCoins = () => async (dispatch: Dispatch, getState: ()=>TRootStat
       dispatch(getCoinsFailure('Cannot load data from server.'))
     }
   } catch (e) {
-    dispatch(getCoinsFailure(e))
+    dispatch(getCoinsFailure(e.message))
   }
 }
 

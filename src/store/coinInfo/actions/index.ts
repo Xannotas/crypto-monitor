@@ -17,6 +17,7 @@ const COIN_HISTORY_SUCCESS = 'COIN_HISTORY/LOAD:SUCCESS'
 const COIN_HISTORY_FAILURE = 'COIN_HISTORY/LOAD:FAILURE'
 
 const COIN_HISTORY_CHANGE_MODE = 'COIN_HISTORY/MODE:CHANGE'
+const COIN_TARGET_CODE = 'COIN/TARGET_CODE:SET'
 
 /*
   COIN INFO
@@ -69,8 +70,18 @@ export const changeHistoryMode = (payload: TCoinHistoryMode): TChangeHistoryMode
   payload
 })
 
+/*
+
+*/
+
+type TSetTargetCoinCode = { type: typeof COIN_TARGET_CODE, payload: TCoinCode }
+export const setTargetCoinCode = (payload: TCoinCode): TSetTargetCoinCode => ({
+  type: COIN_TARGET_CODE,
+  payload
+})
+
 export type TActions = TGetCoinInfoRequest | TGetCoinInfoSuccess | TGetCoinInfoFailure | TResetCoinInfo |
-  TGetCoinHistoryFailure | TGetCoinHistorySuccess | TGetCoinHistoryRequest | TChangeHistoryMode
+  TGetCoinHistoryFailure | TGetCoinHistorySuccess | TGetCoinHistoryRequest | TChangeHistoryMode | TSetTargetCoinCode
 
 export const getCoinInfo = (coinCode: TCoinCode) => async (dispatch: Dispatch, getState: () => TRootState) => {
   dispatch(getCoinInfoRequest())

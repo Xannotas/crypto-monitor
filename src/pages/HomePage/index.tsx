@@ -2,24 +2,26 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 
 import { TRootState } from '../../store';
-import { TCoinInfo } from '../../utils/types';
+import { TCoinInfo, TCoinCode } from '../../utils/types';
 import { getCoins } from '../../store/topCoinsList/actions'
 import { coinsSelector, isFetchingSelector, errorSelector } from '../../store/topCoinsList/selectors';
 
 import TopCoinsTable from '../../components/TopCoinsTable';
 import Loader from '../../components/Loader';
 import CurrencyConverter from '../../containers/CurrencyConverter';
+import { targetCoinCodeSelector } from '../../store/coinInfo/selectors';
 
 type TStateProps = {
   coins: TCoinInfo[],
   isFetching: boolean,
-  error: string
+  error: string,
+  targetCoinCode: TCoinCode
 }
 type TDispatchProps = {
   getCoins: () => void
 }
 
-const HomePage: React.FC<TStateProps & TDispatchProps> = ({ coins, getCoins, isFetching, error }) => {
+const HomePage: React.FC<TStateProps & TDispatchProps> = ({ coins, getCoins, isFetching, error, targetCoinCode }) => {
   const coinsUpdateTimeMs = 130 * 1000
   useEffect(() => {
     getCoins()
@@ -30,7 +32,7 @@ const HomePage: React.FC<TStateProps & TDispatchProps> = ({ coins, getCoins, isF
     return () => {
       clearInterval(intervalUpdate)
     }
-  }, []) // eslint-disable-line
+  }, [targetCoinCode]) // eslint-disable-line
 
   return (
     <section className="coins">
@@ -59,7 +61,8 @@ const HomePage: React.FC<TStateProps & TDispatchProps> = ({ coins, getCoins, isF
 const mapState = (state: TRootState): TStateProps => ({
   coins: coinsSelector(state),
   isFetching: isFetchingSelector(state),
-  error: errorSelector(state)
+  error: errorSelector(state),
+  targetCoinCode: targetCoinCodeSelector(state)
 })
 
 export default connect<TStateProps, TDispatchProps, {}, TRootState>(mapState, { getCoins })(HomePage);

@@ -6,14 +6,15 @@ import { currencies } from '../../utils/constants'
 import { TCoinCode, TCoinFullInfo } from '../../utils/types'
 import { TRootState } from '../../store'
 import { getCoinInfo, resetCoinInfo } from '../../store/coinInfo/actions'
-import { isFetchingSelector, coinInfoSelector } from '../../store/coinInfo/selectors'
+import { isFetchingSelector, coinInfoSelector, targetCoinCodeSelector } from '../../store/coinInfo/selectors'
 
 import Loader from '../../components/Loader'
 import CoinInfo from '../../containers/CoinInfo'
 
 type TMapState = {
   coinInfo: TCoinFullInfo,
-  isFetching: boolean
+  isFetching: boolean,
+  targetCoinCode: TCoinCode
 }
 type TMapDispatch = {
   getCoinInfo: (coinCode: TCoinCode) => void,
@@ -23,7 +24,7 @@ type TMapDispatch = {
 type TProps = RouteComponentProps & TMapState & TMapDispatch
 
 const CoinPage: React.FC<TProps> = ({ match, getCoinInfo, resetCoinInfo,
-  isFetching, coinInfo }) => {
+  isFetching, coinInfo, targetCoinCode }) => {
 
   // @ts-ignore
   const coinCode: TCoinCode = match.params.code.toUpperCase()
@@ -36,7 +37,7 @@ const CoinPage: React.FC<TProps> = ({ match, getCoinInfo, resetCoinInfo,
     return () => {
       resetCoinInfo()
     }
-  }, [coinCode]) // eslint-disable-line
+  }, [coinCode, targetCoinCode]) // eslint-disable-line
 
   if (!validCoinCode) {
     return <Redirect to='/home' />
@@ -61,7 +62,8 @@ const CoinPage: React.FC<TProps> = ({ match, getCoinInfo, resetCoinInfo,
 const mapState = (state: TRootState): TMapState => {
   return {
     coinInfo: coinInfoSelector(state),
-    isFetching: isFetchingSelector(state)
+    isFetching: isFetchingSelector(state),
+    targetCoinCode: targetCoinCodeSelector(state)
   }
 }
 

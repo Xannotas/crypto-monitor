@@ -1,3 +1,4 @@
+import { TRootState } from './../../index';
 import { TCoinCode } from '../../../utils/types';
 import { Dispatch } from 'redux';
 import api from '../../../api'
@@ -30,10 +31,12 @@ const getPriceSuccess = (payload: TGetPriceSuccessPayload): TGetPriceSuccess => 
 
 export type TActions = TGetPriceRequest | TGetPriceFailure | TGetPriceSuccess
 
-export const getPrice = (currency: TCoinCode, targetCurrency: TCoinCode) => async (dispatch: Dispatch) => {
+export const getPrice = (currency: TCoinCode) => async (dispatch: Dispatch, getState: ()=> TRootState) => {
   dispatch(getPriceRequest())
 
   try {
+    const targetCurrency = getState().coinInfo.targetCoinCode
+
     const response: any = await api.prices.getPrice(currency, targetCurrency)
     const data: number = response.data[targetCurrency]
 

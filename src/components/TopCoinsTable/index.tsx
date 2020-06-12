@@ -5,7 +5,7 @@ import './topCoinsTable.scss'
 import { Link } from 'react-router-dom'
 
 type TProps = {
-  coins: TCoinInfo[],
+  coins: TCoinInfo[]
 }
 
 const TopCoinsTable: React.FC<TProps> = ({ coins }) => (
