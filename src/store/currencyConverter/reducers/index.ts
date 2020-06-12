@@ -1,5 +1,5 @@
 import { TActions } from './../actions';
-import { TCoinCode } from './../../../types';
+import { TCoinCode } from '../../../utils/types';
 
 const initialState = {
   currencyCode: 'BTC' as TCoinCode,

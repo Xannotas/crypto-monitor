@@ -1,5 +1,5 @@
 import React from 'react'
-import { TCoinInfo } from '../../types'
+import { TCoinInfo } from '../../utils/types'
 
 import './topCoinsTable.scss'
 import { Link } from 'react-router-dom'

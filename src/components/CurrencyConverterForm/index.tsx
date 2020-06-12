@@ -1,8 +1,8 @@
 import React, { useState, useMemo, useEffect } from 'react'
 
 import './currencyConverterForm.scss'
-import { TCoinCode } from '../../types'
-import { currencies } from '../../constants'
+import { TCoinCode } from '../../utils/types'
+import { currencies } from '../../utils/constants'
 
 import Input from '../Input'
 import Select from '../Select'

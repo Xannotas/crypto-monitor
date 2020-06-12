@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 
 import './currencyConverter.scss'
-import { TCoinCode } from '../../types'
+import { TCoinCode } from '../../utils/types'
 import { TRootState } from '../../store'
 import { priceSelector, isFetchingSelector, currencyCodeSelector, currencyTargetCodeSelector } from '../../store/currencyConverter/selectors'
 import { getPrice } from '../../store/currencyConverter/actions'

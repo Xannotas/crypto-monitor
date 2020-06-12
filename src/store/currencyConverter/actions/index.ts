@@ -1,4 +1,4 @@
-import { TCoinCode } from './../../../types';
+import { TCoinCode } from '../../../utils/types';
 import { Dispatch } from 'redux';
 import api from '../../../api'
 

@@ -1,4 +1,4 @@
-import { TCoinCode, TCoinHistoryMode } from './../types';
+import { TCoinCode, TCoinHistoryMode } from '../utils/types';
 import { instance } from './constants';
 
 export default {

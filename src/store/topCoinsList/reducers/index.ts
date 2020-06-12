@@ -1,5 +1,5 @@
 import { TActions } from '../actions';
-import { TCoinInfo } from '../../../types';
+import { TCoinInfo } from '../../../utils/types';
 
 const initialState = {
   coins: [] as TCoinInfo[],

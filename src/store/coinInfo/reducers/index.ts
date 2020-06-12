@@ -1,5 +1,5 @@
 import { TActions } from './../actions';
-import { TCoinFullInfo, TCoinCode, TCoinHistoryMode, TCoinHistroryDataElement } from './../../../types';
+import { TCoinFullInfo, TCoinCode, TCoinHistoryMode, TCoinHistroryDataElement } from '../../../utils/types';
 
 const initialState = {
   coinInfo: {} as TCoinFullInfo,

@@ -4,13 +4,13 @@ import { connect } from 'react-redux';
 
 import api from './api';
 import { TRootState } from './store';
-import { TCoinCode } from './types';
+import { TCoinCode } from './utils/types';
 import { targetCoinCodeSelector } from './store/coinInfo/selectors';
 
 import HomePage from './pages/HomePage';
 import CoinPage from './pages/CoinPage';
 import Header from './components/Header';
-import { setCurrencies } from './constants';
+import { setCurrencies } from './utils/constants';
 
 type TMapState = {
   targetCoinCode: TCoinCode

@@ -1,6 +1,6 @@
 import { TRootState } from './../../index';
-import { imagesUrlServer } from './../../../constants';
-import { TCoinInfo } from './../../../types';
+import { imagesUrlServer } from '../../../utils/constants';
+import { TCoinInfo } from '../../../utils/types';
 import { Dispatch } from 'redux'
 import api from '../../../api'
 

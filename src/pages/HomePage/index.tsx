@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 
 import { TRootState } from '../../store';
-import { TCoinInfo } from '../../types';
+import { TCoinInfo } from '../../utils/types';
 import { getCoins } from '../../store/topCoinsList/actions'
 import { coinsSelector, isFetchingSelector, errorSelector } from '../../store/topCoinsList/selectors';
 

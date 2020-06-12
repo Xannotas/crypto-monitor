@@ -1,4 +1,4 @@
-import defaultCurrencies from './assets/defaultCurrencies.json'
+import defaultCurrencies from '../assets/defaultCurrencies.json'
 
 export const imagesUrlServer = 'https://www.cryptocompare.com'
 

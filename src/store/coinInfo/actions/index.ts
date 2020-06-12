@@ -1,6 +1,6 @@
-import { currencies, imagesUrlServer } from './../../../constants';
+import { currencies, imagesUrlServer } from '../../../utils/constants';
 import { TRootState } from './../../index';
-import { TCoinCode, TCoinFullInfo, TCoinHistroryDataElement, TCoinHistoryMode } from './../../../types';
+import { TCoinCode, TCoinFullInfo, TCoinHistroryDataElement, TCoinHistoryMode } from '../../../utils/types';
 import { Dispatch } from 'redux';
 import fromUnixTime from 'date-fns/fromUnixTime'
 import formatDate from 'date-fns/format'
