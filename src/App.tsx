@@ -31,7 +31,7 @@ const App: React.FC<TMapState> = ({ targetCoinCode }) => {
         }
       })
     } catch (e) {
-      console.log(e)
+      console.warn(e)
     }
   }, []) // eslint-disable-line
 

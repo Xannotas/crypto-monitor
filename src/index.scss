@@ -14,7 +14,12 @@ code {
 
 a {
   color: #222222;
+
   &:hover {
     text-decoration: none;
   }
+}
+
+.d-none {
+  display: none !important;
 }

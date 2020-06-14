@@ -2,12 +2,13 @@ import React from 'react'
 import classNames from 'classnames'
 
 import './coinHeadInfo.scss'
-import { TCoinFullInfo } from '../../utils/types'
+import { TCoinFullInfo, TCoinCode } from '../../utils/types'
 
 type TProps = {
-  coinInfo: TCoinFullInfo
+  coinInfo: TCoinFullInfo,
+  targetCoinCode: TCoinCode
 }
-const CoinHeadInfo: React.FC<TProps> = ({ coinInfo }) => {
+const CoinHeadInfo: React.FC<TProps> = ({ coinInfo, targetCoinCode }) => {
 
   const priceDown = coinInfo.changePercent24Hour && coinInfo.changePercent24Hour[0] === '-' ? true : false
 
@@ -24,7 +25,7 @@ const CoinHeadInfo: React.FC<TProps> = ({ coinInfo }) => {
           <div>1 {coinInfo.code} =</div>
           <span className="coin-info-head__price-text">{coinInfo.price}</span>
 
-          <div className={classNames('coin-info-head__price-change', { 'coin-info-head__price-change--is-down': priceDown })}>
+          <div className={classNames('coin-info-head__price-change', { 'coin-info-head__price-change--is-down': priceDown }, {'d-none': coinInfo.code === targetCoinCode})}>
             <span className="coin-info-head__change-arrow">
               {priceDown
                 ? <svg className="bi bi-caret-down-fill" width="1em" height="1em" viewBox="0 0 16 16" fill="#ff7060" xmlns="http://www.w3.org/2000/svg">

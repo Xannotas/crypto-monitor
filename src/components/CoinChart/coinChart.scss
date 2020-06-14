@@ -1,13 +1,23 @@
 .coin-info-rechart {
   margin: 10px 0;
 
-  &.fetching {
-    min-height: 300px;
+  &.fetching,
+  &.error {
     background: #f8f8f8;
-    display: flex;
-    justify-content: center;
-    align-items: center;
   }
+
+  &__wrapper {
+    &.fetching,
+    &.error {
+      min-height: 300px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: url('https://www.pngkey.com/png/full/217-2175498_stock-market-png-stock-market-graph-png.png') no-repeat center right;
+      background-size: contain;
+    }
+  }
+  
 
   &__content {
     border: 1px solid;

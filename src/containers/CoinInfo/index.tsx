@@ -4,20 +4,22 @@ import { connect } from 'react-redux'
 import './coinInfo.scss'
 import { TCoinFullInfo, TCoinHistroryDataElement, TCoinHistoryMode, TCoinCode } from '../../utils/types'
 import { TRootState } from '../../store'
-import { isHistoryFetchingSelector, coinHistorySelector, historyModeSelector } from '../../store/coinInfo/selectors'
+import { isHistoryFetchingSelector, coinHistorySelector, historyModeSelector, historyErrorSelector } from '../../store/coinInfo/selectors'
 import { changeHistoryMode, getCoinHistory } from '../../store/coinInfo/actions'
 import CoinChart from '../../components/CoinChart'
 import CoinDetailInfo from '../../components/CoinDetailInfo'
 import CoinHeadInfo from '../../components/CoinHeadInfo'
 
 type TOwnProps = {
-  coinInfo: TCoinFullInfo
+  coinInfo: TCoinFullInfo,
+  targetCoinCode: TCoinCode
 }
 
 type TMapState = {
   coinHistory: TCoinHistroryDataElement[],
   historyMode: TCoinHistoryMode,
-  isHistoryFetching: boolean
+  isHistoryFetching: boolean,
+  historyError: string
 }
 
 type TMapDispatch = {
@@ -27,7 +29,7 @@ type TMapDispatch = {
 
 type TProps = TOwnProps & TMapState & TMapDispatch
 
-const CoinInfo: React.FC<TProps> = ({ coinInfo, coinHistory, isHistoryFetching, historyMode, changeHistoryMode, getCoinHistory}) => {
+const CoinInfo: React.FC<TProps> = ({ coinInfo, coinHistory, isHistoryFetching, historyMode, historyError, targetCoinCode, changeHistoryMode, getCoinHistory}) => {
   const prices: number[] = coinHistory.map(row => row.price)
 
   useEffect(() => {
@@ -36,7 +38,7 @@ const CoinInfo: React.FC<TProps> = ({ coinInfo, coinHistory, isHistoryFetching, 
 
   return (
     <div className="coin-info">
-      <CoinHeadInfo coinInfo={coinInfo} />
+      <CoinHeadInfo coinInfo={coinInfo} targetCoinCode={targetCoinCode} />
 
       <CoinDetailInfo coinInfo={coinInfo} />
 
@@ -47,6 +49,7 @@ const CoinInfo: React.FC<TProps> = ({ coinInfo, coinHistory, isHistoryFetching, 
         changeHistoryMode={changeHistoryMode}
         toSymbol={coinInfo.toSymbol}
         toCode={coinInfo.toCode}
+        historyError={historyError}
       />
     </div>
   )
@@ -56,7 +59,8 @@ const mapState = (state: TRootState): TMapState => {
   return {
     coinHistory: coinHistorySelector(state),
     isHistoryFetching: isHistoryFetchingSelector(state),
-    historyMode: historyModeSelector(state)
+    historyMode: historyModeSelector(state),
+    historyError: historyErrorSelector(state)
   }
 }
 

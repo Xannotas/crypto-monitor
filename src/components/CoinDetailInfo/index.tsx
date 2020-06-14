@@ -28,7 +28,7 @@ const CoinDetailInfo: React.FC<TProps> = ({ coinInfo }) => {
 
         <div className="item">
           <div className="title">Circulating Supply</div>
-          <div className="text">{formatCost(toFixedString(coinInfo.supply, 0), coinInfo.toSymbol, coinInfo.toCode)}</div>
+          <div className="text">{formatCost(toFixedString(coinInfo.supply, 0), '$', 'USD')}</div>
         </div>
       </div>
 

@@ -50,7 +50,7 @@ const CoinPage: React.FC<TProps> = ({ match, getCoinInfo, resetCoinInfo,
           ? <Loader />
           : <>
             {Object.keys(coinInfo).length &&
-              <CoinInfo coinInfo={coinInfo}/>
+              <CoinInfo coinInfo={coinInfo} targetCoinCode={targetCoinCode}/>
             }
           </>
         }

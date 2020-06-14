@@ -17,9 +17,10 @@ type TProps = {
   toCode: TCoinCode,
 
   historyMode: TCoinHistoryMode,
+  historyError: string,
   changeHistoryMode: (mode: TCoinHistoryMode) => void
 }
-const CoinChart: React.FC<TProps> = ({ prices, isFetching, changeHistoryMode, data, historyMode, toSymbol, toCode }) => {
+const CoinChart: React.FC<TProps> = ({ prices, isFetching, changeHistoryMode, data, historyMode, toSymbol, toCode, historyError }) => {
   const navItemValues = {
     '1h': '1 hour',
     '1d': '1 day',
@@ -62,40 +63,51 @@ const CoinChart: React.FC<TProps> = ({ prices, isFetching, changeHistoryMode, da
   }
 
   return (
-    <div className={classNames("coin-info-rechart", { 'fetching': isFetching })}>
+    <div className={classNames("coin-info-rechart", { 'fetching': isFetching }, { 'error': historyError })}>
+      <div className={classNames("coin-info-rechart__wrapper", { 'fetching': isFetching }, { 'error': historyError })}>
       {isFetching
         ? <Loader />
         : <>
-          <div className="coin-info-rechart__controll">
-            <ul className="nav nav-tabs">
-              {Object.entries(navItemValues).map(([key, value]) => (
-                <li key={key} className="nav-item">
-                  <button className={classNames('btn', 'nav-link', { 'active': key === historyMode })}
-                    onClick={() => changeHistoryMode(key as TCoinHistoryMode)}>
-                    {value}
-                  </button>
-                </li>
-              ))}
-            </ul>
-          </div>
+          {!historyError
+            ? <>
+              <div className="coin-info-rechart__controll">
+                <ul className="nav nav-tabs">
+                  {Object.entries(navItemValues).map(([key, value]) => (
+                    <li key={key} className="nav-item">
+                      <button className={classNames('btn', 'nav-link', { 'active': key === historyMode })}
+                        onClick={() => changeHistoryMode(key as TCoinHistoryMode)}>
+                        {value}
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              </div>
 
-          <div className="coin-info-rechart__content">
-            <ResponsiveContainer width='100%' height='50%' minWidth='800px' minHeight='300px'>
-              <AreaChart
-                data={data}
-                margin={{
-                  top: 10, right: 30, left: 0, bottom: 0,
-                }}
-              >
-                <XAxis dataKey='formatedDate' minTickGap={20} />
-                <YAxis domain={[domainRange.min, domainRange.max]} width={90}/>
-                <Tooltip content={renderTooltipContent} />
-                <Area type="monotone" dataKey="price" stroke="#82bcf3" fill="#cce6ff" />
-              </AreaChart>
-            </ResponsiveContainer>
-          </div>
+              <div className="coin-info-rechart__content">
+                <ResponsiveContainer width='100%' height='50%' minWidth='800px' minHeight='300px'>
+                  <AreaChart
+                    data={data}
+                    margin={{
+                      top: 10, right: 30, left: 0, bottom: 0,
+                    }}
+                  >
+                    <XAxis dataKey='formatedDate' minTickGap={20} />
+                    <YAxis domain={[domainRange.min, domainRange.max]} width={90} />
+                    <Tooltip content={renderTooltipContent} />
+                    <Area type="monotone" dataKey="price" stroke="#82bcf3" fill="#cce6ff" />
+                  </AreaChart>
+                </ResponsiveContainer>
+              </div>
+            </>
+
+            : <div>
+              <div>{historyError}</div>
+              <div>Please change target currency.</div>
+            </div>
+          }
         </>
       }
+    </div>
     </div>
   )
 }
