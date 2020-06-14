@@ -4,7 +4,7 @@ export const toRoundValue = (value: number) => {
   if (value <= 0) {
     return 0
   }
-  return Math.floor((value / 100)) * 100
+  return Math.floor((value * 100)) / 100
 }
 
 export const toFixedString = (text: string, length: number = 2, symb: string = '.') => {

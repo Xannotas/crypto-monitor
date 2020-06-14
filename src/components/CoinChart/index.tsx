@@ -32,8 +32,13 @@ const CoinChart: React.FC<TProps> = ({ prices, isFetching, changeHistoryMode, da
   }
 
   const priceRange = {
-    'min': Math.min(...prices),
-    'max': Math.max(...prices)
+    'min': prices.length ? Math.min(...prices) : 0,
+    'max': prices.length ? Math.max(...prices) : 0
+  }
+
+  const domainRange = {
+    'min': priceRange.min ? toRoundValue(priceRange.min - priceRange.min / 10) : 0,
+    'max': priceRange.max ? toRoundValue(priceRange.max + priceRange.max / 10) : 0
   }
 
   type TRenderTooltipContentProps = {
@@ -83,7 +88,7 @@ const CoinChart: React.FC<TProps> = ({ prices, isFetching, changeHistoryMode, da
                 }}
               >
                 <XAxis dataKey='formatedDate' minTickGap={20} />
-                <YAxis domain={[toRoundValue(priceRange.min - 100), toRoundValue(priceRange.max + 100)]} />
+                <YAxis domain={[domainRange.min, domainRange.max]} width={90}/>
                 <Tooltip content={renderTooltipContent} />
                 <Area type="monotone" dataKey="price" stroke="#82bcf3" fill="#cce6ff" />
               </AreaChart>

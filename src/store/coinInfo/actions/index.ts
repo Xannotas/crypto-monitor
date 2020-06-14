@@ -128,9 +128,9 @@ export const getCoinHistory = (coinCode: TCoinCode) => async (dispatch: Dispatch
     const targetCoinCode: TCoinCode = getState().coinInfo.targetCoinCode
     const historyMode = getState().coinInfo.historyMode
     const response: any = await api.coinInfo.getCoinHistoryData(coinCode, targetCoinCode, historyMode)
-    const data: any[] = response.data.Data.Data
+      const data: any[] = response.data.Data.Data
 
-    if (response.Response !== 'Error') {
+    if (response.data.Response !== 'Error') {
       const history: TCoinHistroryDataElement[] = data.map((row: any) => ({
         formatedDate: formatDate(fromUnixTime(row.time), formatPattern[historyMode] || 'dd.MM.yyyy HH:mm'),
         fullDate: formatDate(fromUnixTime(row.time), 'dd MMM yyyy HH:mm'),
@@ -139,7 +139,7 @@ export const getCoinHistory = (coinCode: TCoinCode) => async (dispatch: Dispatch
 
       dispatch(getCoinHistorySuccess(history))
     } else {
-      dispatch(getCoinHistoryFailure('err'))
+      dispatch(getCoinHistoryFailure(response.data.Message))
     }
 
   } catch (e) {
