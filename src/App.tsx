@@ -5,11 +5,12 @@ import { connect } from 'react-redux';
 import api from './api';
 import { TRootState } from './store';
 import { TCoinCode } from './utils/types';
+import { setCurrencies } from './utils/constants';
 import { targetCoinCodeSelector } from './store/coinInfo/selectors';
 
 import HomePage from './pages/HomePage';
 import CoinPage from './pages/CoinPage';
-import { setCurrencies } from './utils/constants';
+import CoinsListPage from './pages/CoinsListPage';
 import HeaderCointainer from './containers/HeaderCointainer';
 
 type TMapState = {
@@ -41,6 +42,7 @@ const App: React.FC<TMapState> = ({ targetCoinCode }) => {
 
       <Switch>
         <Route exact path='/home' component={HomePage} />
+        <Route exact path='/coins' component={CoinsListPage} />
         <Route exact path='/coins/:code' component={CoinPage} />
 
         <Redirect from='*' to='/home' />

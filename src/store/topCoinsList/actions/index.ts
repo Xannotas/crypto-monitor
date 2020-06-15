@@ -9,7 +9,10 @@ const GET_COINS_REQUEST = 'TOP_COINS/GET_COINS:REQUEST'
 const GET_COINS_SUCCESS = 'TOP_COINS/GET_COINS:SUCCESS'
 const GET_COINS_FAILURE = 'TOP_COINS/GET_COINS:FAILURE'
 
-export type TActions = TGetCoinsRequest | TGetCoinsSuccess | TGetCoinsFailure
+const CHANGE_PAGE = 'TOP_COINS/PAGE_NUMBER:CHANGE'
+const RESET_LIST = 'TOP_COINS/LIST:RESET'
+
+export type TActions = TGetCoinsRequest | TGetCoinsSuccess | TGetCoinsFailure | TChangePage | TResetCoinsList
 
 type TGetCoinsRequest = { type: typeof GET_COINS_REQUEST }
 const getCoinsRequest = (): TGetCoinsRequest => ({
@@ -28,14 +31,25 @@ const getCoinsSuccess = (payload: TCoinInfo[]): TGetCoinsSuccess => ({
   payload
 })
 
-export const getCoins = () => async (dispatch: Dispatch, getState: () => TRootState) => {
+type TChangePage = { type: typeof CHANGE_PAGE, payload: number }
+export const changePage = (payload: number): TChangePage => ({
+  type: CHANGE_PAGE,
+  payload
+})
+
+type TResetCoinsList = { type: typeof RESET_LIST }
+export const resetCoinsList = (): TResetCoinsList => ({
+  type: RESET_LIST
+})
+
+export const getCoins = (limit : number = 10) => async (dispatch: Dispatch, getState: () => TRootState) => {
   dispatch(getCoinsRequest())
 
   try {
     const targetCoinCode: TCoinCode = getState().coinInfo.targetCoinCode
-    const limit = 10
+    const pageNumber: number = getState().topCoinsList.pageNumber
 
-    const response: any = await api.toplists.getTopListByTierVolume(limit, targetCoinCode)
+    const response: any = await api.toplists.getTopListByTierVolume(limit, targetCoinCode, pageNumber)
     const data = response.data
     const resCoins: any[] = data.Data
 

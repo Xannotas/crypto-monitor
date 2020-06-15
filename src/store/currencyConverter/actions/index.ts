@@ -35,7 +35,7 @@ export const getPrice = (currency: TCoinCode) => async (dispatch: Dispatch, getS
   dispatch(getPriceRequest())
 
   try {
-    const targetCurrency = getState().coinInfo.targetCoinCode
+    const targetCurrency = getState().currencyConverter.currencyTargetCode
 
     const response: any = await api.prices.getPrice(currency, targetCurrency)
     const data: number = response.data[targetCurrency]

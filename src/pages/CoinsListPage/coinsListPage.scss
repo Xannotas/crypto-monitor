@@ -1,0 +1,9 @@
+.coins-list {
+  .top-coins {
+    &-table {
+      td, th{
+        padding: 5px 0;
+      }
+    }
+  }
+}

@@ -89,12 +89,12 @@ export const getCoinInfo = (coinCode: TCoinCode) => async (dispatch: Dispatch, g
     const targetCoinCode: TCoinCode = getState().coinInfo.targetCoinCode
     const response: any = await api.coinInfo.getCoinInfo(coinCode, targetCoinCode)
     const data = response.data
-
-    const raw = data.RAW[coinCode][targetCoinCode]
-    const display = data.DISPLAY[coinCode][targetCoinCode]
     
-    if (response.Response !== 'Error') {
-      const data: TCoinFullInfo = {
+    if (data.Response !== 'Error') {
+      const raw = data.RAW[coinCode][targetCoinCode]
+      const display = data.DISPLAY[coinCode][targetCoinCode]
+
+      const coinInfo: TCoinFullInfo = {
         code: coinCode,
         name: currencies[coinCode],
         imageUrl: imagesUrlServer + raw.IMAGEURL,
@@ -112,9 +112,11 @@ export const getCoinInfo = (coinCode: TCoinCode) => async (dispatch: Dispatch, g
         low24Hour: raw.LOW24HOUR,
         high24Hour: raw.HIGH24HOUR,
       }
-      dispatch(getCoinInfoSuccess(data))
+
+      dispatch(getCoinInfoSuccess(coinInfo))
+
     } else {
-      dispatch(getCoinInfoFailure('err'))
+      dispatch(getCoinInfoFailure(data.Message))
     }
 
   } catch (e) {

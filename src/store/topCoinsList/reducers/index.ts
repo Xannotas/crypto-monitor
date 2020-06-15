@@ -4,6 +4,7 @@ import { TCoinInfo } from '../../../utils/types';
 const initialState = {
   coins: [] as TCoinInfo[],
   isFetching: false as boolean,
+  pageNumber: 0 as number,
   _error: '' as string
 }
 
@@ -15,7 +16,8 @@ const topCoinsReducer = (state = initialState, action: TActions) : TReducerState
       return {
         ...state,
         isFetching: false,
-        coins: action.payload
+        coins: action.payload,
+        _error: ''
       }
     }
 
@@ -30,7 +32,24 @@ const topCoinsReducer = (state = initialState, action: TActions) : TReducerState
     case 'TOP_COINS/GET_COINS:REQUEST' : {
       return {
         ...state,
-        isFetching: true
+        isFetching: true,
+        _error: ''
+      }
+    }
+
+    case 'TOP_COINS/PAGE_NUMBER:CHANGE' : {
+      return {
+        ...state,
+        pageNumber: action.payload
+      }
+    }
+
+    case 'TOP_COINS/LIST:RESET': {
+      return {
+        ...state,
+        pageNumber: 0,
+        coins: [],
+        _error: ''
       }
     }
 

@@ -1,6 +1,8 @@
 import React from 'react'
 import classNames from 'classnames'
 
+import './loader.scss'
+
 type TProps = {
   className?: string
   center?: boolean,

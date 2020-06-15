@@ -1,10 +1,23 @@
 .header {
-  padding: 20px 0;
+  padding: 10px 0;
   margin-bottom: 20px;
   border-bottom: 1px solid #00d665;
+
   &-logo {
+    vertical-align: sub;
     img {
-      height: 30px;
+      height: 25px;
+    }
+  }
+
+  &-menu {
+    text-align: right;
+    &__item {
+      display: inline-block;
+
+      &+& {
+        margin-left: 20px;
+      }
     }
   }
 }
