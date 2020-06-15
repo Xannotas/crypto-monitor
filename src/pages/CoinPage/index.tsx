@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { RouteComponentProps, Redirect } from 'react-router-dom'
+import { RouteComponentProps } from 'react-router-dom'
 import { connect } from 'react-redux'
 
 import { TCoinCode, TCoinFullInfo } from '../../utils/types'
@@ -35,8 +35,6 @@ const CoinPage: React.FC<TProps> = ({ match, getCoinInfo, resetCoinInfo,
       resetCoinInfo()
     }
   }, [coinCode, targetCoinCode]) // eslint-disable-line
-
-  // return <Redirect to='/home' />
 
   return (
     <div className='coin'>

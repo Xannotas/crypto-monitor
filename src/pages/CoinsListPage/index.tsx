@@ -1,26 +1,43 @@
 import React from 'react'
-import { RouteComponentProps } from 'react-router-dom'
 import { connect } from 'react-redux'
 
 import './coinsListPage.scss'
 import { TRootState } from '../../store'
+import { changePageNumber } from '../../store/topCoinsList/actions'
 
 import TopCoinsContainer from '../../containers/TopCoinsContainer'
+import { pageNumberSelector, isFetchingSelector } from '../../store/topCoinsList/selectors'
+import SimplePagination from '../../components/SimplePagination'
 
 type TMapState = {
-  
+  pageNumber: number,
+  isFetching: boolean
 }
+
 type TMapDispatch = {
-  
+  changePageNumber: (newPage: number) => void
 }
 
-type TProps = RouteComponentProps & TMapState & TMapDispatch
+type TProps = TMapState & TMapDispatch
 
-const CoinPage: React.FC<TProps> = () => {
+const CoinPage: React.FC<TProps> = ({ changePageNumber, pageNumber, isFetching }) => {
+  const pageSize = 100
+  const maxCoins = 3000
+
   return (
-    <div className='coins-list'>
+    <div className='coins-list mb-4'>
       <div className="container">
-        <TopCoinsContainer limit={50}/>
+        {!isFetching &&
+          <SimplePagination pageNumber={pageNumber} maxPageNumber={maxCoins / pageSize} onPageChange={changePageNumber} />
+        }
+
+        <div className="mt-2">
+          <TopCoinsContainer limit={pageSize} pageSize={pageSize} />
+        </div>
+
+        {!isFetching &&
+          <SimplePagination pageNumber={pageNumber} maxPageNumber={maxCoins / pageSize} onPageChange={changePageNumber} />
+        }
       </div>
     </div>
   )
@@ -28,8 +45,9 @@ const CoinPage: React.FC<TProps> = () => {
 
 const mapState = (state: TRootState): TMapState => {
   return {
-    
+    pageNumber: pageNumberSelector(state),
+    isFetching: isFetchingSelector(state)
   }
 }
 
-export default connect<TMapState, TMapDispatch, {}, TRootState>(mapState)(CoinPage)
+export default connect<TMapState, TMapDispatch, {}, TRootState>(mapState, { changePageNumber })(CoinPage)

@@ -9,10 +9,10 @@ const GET_COINS_REQUEST = 'TOP_COINS/GET_COINS:REQUEST'
 const GET_COINS_SUCCESS = 'TOP_COINS/GET_COINS:SUCCESS'
 const GET_COINS_FAILURE = 'TOP_COINS/GET_COINS:FAILURE'
 
-const CHANGE_PAGE = 'TOP_COINS/PAGE_NUMBER:CHANGE'
+const CHANGE_PAGE_NUMBER = 'TOP_COINS/PAGE_NUMBER:CHANGE'
 const RESET_LIST = 'TOP_COINS/LIST:RESET'
 
-export type TActions = TGetCoinsRequest | TGetCoinsSuccess | TGetCoinsFailure | TChangePage | TResetCoinsList
+export type TActions = TGetCoinsRequest | TGetCoinsSuccess | TGetCoinsFailure | TChangePageNumber | TResetCoinsList
 
 type TGetCoinsRequest = { type: typeof GET_COINS_REQUEST }
 const getCoinsRequest = (): TGetCoinsRequest => ({
@@ -31,9 +31,9 @@ const getCoinsSuccess = (payload: TCoinInfo[]): TGetCoinsSuccess => ({
   payload
 })
 
-type TChangePage = { type: typeof CHANGE_PAGE, payload: number }
-export const changePage = (payload: number): TChangePage => ({
-  type: CHANGE_PAGE,
+type TChangePageNumber = { type: typeof CHANGE_PAGE_NUMBER, payload: number }
+export const changePageNumber = (payload: number): TChangePageNumber => ({
+  type: CHANGE_PAGE_NUMBER,
   payload
 })
 

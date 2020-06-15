@@ -93,7 +93,8 @@ export const getCoinInfo = (coinCode: TCoinCode) => async (dispatch: Dispatch, g
     if (data.Response !== 'Error') {
       const raw = data.RAW[coinCode][targetCoinCode]
       const display = data.DISPLAY[coinCode][targetCoinCode]
-
+      console.log(response);
+      
       const coinInfo: TCoinFullInfo = {
         code: coinCode,
         name: currencies[coinCode],

@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import './topCoinsContainer.scss'
 import { TRootState } from '../../store'
 import { TCoinInfo, TCoinCode } from '../../utils/types'
-import { getCoins, resetCoinsList } from '../../store/topCoinsList/actions'
+import { getCoins } from '../../store/topCoinsList/actions'
 import { targetCoinCodeSelector } from '../../store/coinInfo/selectors'
 import { coinsSelector, isFetchingSelector, pageNumberSelector } from '../../store/topCoinsList/selectors'
 
@@ -12,7 +12,8 @@ import TopCoinsTable from '../../components/TopCoinsTable'
 import Loader from '../../components/Loader'
 
 type TOwnProps = {
-  limit: number
+  limit: number,
+  pageSize?: number
 }
 
 type TMapState = {
@@ -23,29 +24,24 @@ type TMapState = {
 }
 
 type TMapDispatch = {
-  getCoins: (limit: number) => void,
-  resetCoinsList: () => void
+  getCoins: (limit: number) => void
 }
 
 type TProps = TMapState & TMapDispatch & TOwnProps
 
-const TopCoinsContainer: React.FC<TProps> = ({ coins, pageNumber, isFetching, limit, targetCoinCode, getCoins, resetCoinsList }) => {
+const TopCoinsContainer: React.FC<TProps> = ({ coins, pageNumber, isFetching, limit, targetCoinCode, pageSize, getCoins }) => {
 
   useEffect(() => {
     getCoins(limit)
-
-    return () => {
-      resetCoinsList()
-    }
   }, [pageNumber, targetCoinCode]) // eslint-disable-line
 
   return (
     <div className='top-coins'>
       {isFetching
         ? <Loader />
-        : <>
-          <TopCoinsTable coins={coins} />
-        </>
+        : <div className='top-coins__wrapper'>
+          <TopCoinsTable coins={coins} pageNumber={pageNumber} pageSize={pageSize} />
+        </div>
       }
     </div>
   )
@@ -60,4 +56,4 @@ const mapState = (state: TRootState): TMapState => {
   }
 }
 
-export default connect<TMapState, TMapDispatch, TOwnProps, TRootState>(mapState, { getCoins, resetCoinsList })(TopCoinsContainer)
+export default connect<TMapState, TMapDispatch, TOwnProps, TRootState>(mapState, { getCoins })(TopCoinsContainer)

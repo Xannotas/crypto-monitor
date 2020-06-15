@@ -5,10 +5,12 @@ import './topCoinsTable.scss'
 import { Link } from 'react-router-dom'
 
 type TProps = {
-  coins: TCoinInfo[]
+  coins: TCoinInfo[],
+  pageNumber?: number,
+  pageSize?: number
 }
 
-const TopCoinsTable: React.FC<TProps> = ({ coins }) => (
+const TopCoinsTable: React.FC<TProps> = ({ coins, pageNumber = 0, pageSize = 0 }) => (
   <table className="table top-coins-table">
     <thead>
       <tr>
@@ -23,7 +25,7 @@ const TopCoinsTable: React.FC<TProps> = ({ coins }) => (
     <tbody>
       {coins.map((coin, index) => (
         <tr key={coin.code}>
-          <th scope="row">{++index}</th>
+          <th scope="row">{(index+1) + pageNumber * pageSize}</th>
           <td>
             <Link to={`coins/${coin.code}`} className='top-coins__coin-name'>
               <img className='top-coins__coin-image' src={coin.imageUrl} alt='coin logo' />
