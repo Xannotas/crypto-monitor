@@ -13,17 +13,15 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      background: url('https://www.pngkey.com/png/full/217-2175498_stock-market-png-stock-market-graph-png.png') no-repeat center right;
       background-size: contain;
     }
   }
-  
 
   &__content {
     border: 1px solid;
     border-color: #fff #dee2e6 #dee2e6;
     padding: 5px;
-    overflow: auto;
+    overflow: hidden;
 
     .customized-tooltip-content {
       background: #fff;
@@ -71,5 +69,10 @@
         }
       }
     }
+
+    &__content {
+      overflow: auto;
+    }
+
   }
 }
