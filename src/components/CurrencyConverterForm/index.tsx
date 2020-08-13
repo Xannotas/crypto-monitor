@@ -4,8 +4,7 @@ import './currencyConverterForm.scss'
 import { TCoinCode } from '../../utils/types'
 import { currencies } from '../../utils/constants'
 
-import Input from '../Input'
-import Select from '../Select'
+import {Input, Select} from '../'
 
 type TProps = {
   price: number,

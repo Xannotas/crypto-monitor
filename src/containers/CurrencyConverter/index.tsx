@@ -4,17 +4,21 @@ import { connect } from 'react-redux'
 import './currencyConverter.scss'
 import { TCoinCode } from '../../utils/types'
 import { TRootState } from '../../store'
-import { priceSelector, isFetchingSelector, currencyCodeSelector, currencyTargetCodeSelector } from '../../store/currencyConverter/selectors'
+import {
+  priceSelector,
+  isFetchingSelector,
+  currencyCodeSelector,
+  currencyTargetCodeSelector,
+} from '../../store/currencyConverter/selectors'
 import { getPrice } from '../../store/currencyConverter/actions'
 
-import CurrencyConverterForm from '../../components/CurrencyConverterForm'
-import Loader from '../../components/Loader'
+import { Loader, CurrencyConverterForm } from '../../components'
 
 type TMapState = {
-  price: number,
-  isFetching: boolean,
-  currencyCode: TCoinCode,
-  currencyTargetCode: TCoinCode,
+  price: number
+  isFetching: boolean
+  currencyCode: TCoinCode
+  currencyTargetCode: TCoinCode
 }
 
 type TMapDispatch = {
@@ -23,19 +27,28 @@ type TMapDispatch = {
 
 type TProps = TMapState & TMapDispatch
 
-const CurrencyConverter: React.FC<TProps> = ({ price, getPrice, isFetching, currencyCode, currencyTargetCode }) => {
-
+const CurrencyConverter: React.FC<TProps> = ({
+  price,
+  getPrice,
+  isFetching,
+  currencyCode,
+  currencyTargetCode,
+}) => {
   useEffect(() => {
     getPrice(currencyCode, currencyTargetCode)
-  }, [])  // eslint-disable-line
+  }, []) // eslint-disable-line
 
   return (
     <div className='currency-converter'>
       <div className='d-flex justify-content-between'>
         <span className='h5'>Currency converter</span>
-        {isFetching &&
-          <Loader className='d-inline align-text-top' small={true} center={false} />
-        }
+        {isFetching && (
+          <Loader
+            className='d-inline align-text-top'
+            small={true}
+            center={false}
+          />
+        )}
       </div>
       <CurrencyConverterForm
         price={price}
@@ -43,7 +56,7 @@ const CurrencyConverter: React.FC<TProps> = ({ price, getPrice, isFetching, curr
         currencyTargetCode={currencyTargetCode}
         getPrice={getPrice}
       />
-      <div className="currency-converter__price mt-2">
+      <div className='currency-converter__price mt-2'>
         {`1 ${currencyCode} = ${price} ${currencyTargetCode}`}
       </div>
     </div>
@@ -57,4 +70,6 @@ const mapState = (state: TRootState): TMapState => ({
   currencyTargetCode: currencyTargetCodeSelector(state),
 })
 
-export default connect<TMapState, TMapDispatch, {}, TRootState>(mapState, { getPrice })(CurrencyConverter)
+export default connect<TMapState, TMapDispatch, {}, TRootState>(mapState, {
+  getPrice,
+})(CurrencyConverter)

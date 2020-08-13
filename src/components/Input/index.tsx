@@ -4,22 +4,28 @@ import classNames from 'classnames'
 import './input.scss'
 
 type TProps = {
-  value: string,
-  onChange: (newValue: string) => void,
+  value: string
+  onChange: (newValue: string) => void
 
-  valueType?: 'number',
-  placeholder?: string,
-  type?: string,
-  className?: string,
+  valueType?: 'number'
+  placeholder?: string
+  type?: string
+  className?: string
 }
 
-const Input: React.FC<TProps> = ({ className, placeholder, value, onChange, type, valueType }) => {
-
+const Input: React.FC<TProps> = ({
+  className,
+  placeholder,
+  value,
+  onChange,
+  type,
+  valueType,
+}) => {
   const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     let input = e.currentTarget.value
     if (valueType === 'number') {
       input = input
-        .replace(/[^.\d]+/g, "")
+        .replace(/[^.\d]+/g, '')
         .replace(/^0{2}/g, '0')
         .replace(/^0{1}\d+/g, input.slice(-1))
         .replace(/^([^.]*\.)|\./g, '$1')
@@ -32,7 +38,6 @@ const Input: React.FC<TProps> = ({ className, placeholder, value, onChange, type
       className={classNames('form-control', className)}
       placeholder={placeholder}
       type={type || 'text'}
-
       value={value}
       onChange={onChangeHandler}
     />

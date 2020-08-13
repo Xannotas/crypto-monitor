@@ -5,27 +5,38 @@ import { connect } from 'react-redux'
 import { TCoinCode, TCoinFullInfo } from '../../utils/types'
 import { TRootState } from '../../store'
 import { getCoinInfo, resetCoinInfo } from '../../store/coinInfo/actions'
-import { isFetchingSelector, coinInfoSelector, targetCoinCodeSelector, errorSelector } from '../../store/coinInfo/selectors'
+import {
+  isFetchingSelector,
+  coinInfoSelector,
+  targetCoinCodeSelector,
+  errorSelector,
+} from '../../store/coinInfo/selectors'
 
-import Loader from '../../components/Loader'
-import CoinInfo from '../../containers/CoinInfo'
+import { Loader } from '../../components'
+import { CoinInfo } from '../../containers'
 
 type TMapState = {
-  coinInfo: TCoinFullInfo,
-  isFetching: boolean,
-  targetCoinCode: TCoinCode,
+  coinInfo: TCoinFullInfo
+  isFetching: boolean
+  targetCoinCode: TCoinCode
   error: string
 }
 type TMapDispatch = {
-  getCoinInfo: (coinCode: TCoinCode) => void,
+  getCoinInfo: (coinCode: TCoinCode) => void
   resetCoinInfo: () => void
 }
 
 type TProps = RouteComponentProps & TMapState & TMapDispatch
 
-const CoinPage: React.FC<TProps> = ({ match, getCoinInfo, resetCoinInfo,
-  isFetching, coinInfo, targetCoinCode, error }) => {
-
+const CoinPage: React.FC<TProps> = ({
+  match,
+  getCoinInfo,
+  resetCoinInfo,
+  isFetching,
+  coinInfo,
+  targetCoinCode,
+  error,
+}) => {
   // @ts-ignore
   const coinCode = match.params.code.toUpperCase()
 
@@ -38,17 +49,18 @@ const CoinPage: React.FC<TProps> = ({ match, getCoinInfo, resetCoinInfo,
 
   return (
     <div className='coin'>
-      <div className="container">
-
-        {isFetching
-          ? <Loader />
-          : <>
-            {Object.keys(coinInfo).length && !error
-              ? <CoinInfo coinInfo={coinInfo} targetCoinCode={targetCoinCode} />
-              : <p>{error}</p>
-            }
+      <div className='container'>
+        {isFetching ? (
+          <Loader />
+        ) : (
+          <>
+            {Object.keys(coinInfo).length && !error ? (
+              <CoinInfo coinInfo={coinInfo} targetCoinCode={targetCoinCode} />
+            ) : (
+              <p>{error}</p>
+            )}
           </>
-        }
+        )}
       </div>
     </div>
   )
@@ -59,8 +71,11 @@ const mapState = (state: TRootState): TMapState => {
     coinInfo: coinInfoSelector(state),
     isFetching: isFetchingSelector(state),
     targetCoinCode: targetCoinCodeSelector(state),
-    error: errorSelector(state)
+    error: errorSelector(state),
   }
 }
 
-export default connect<TMapState, TMapDispatch, {}, TRootState>(mapState, { getCoinInfo, resetCoinInfo })(CoinPage)
+export default connect<TMapState, TMapDispatch, {}, TRootState>(mapState, {
+  getCoinInfo,
+  resetCoinInfo,
+})(CoinPage)
