@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState} from 'react'
 import { connect } from 'react-redux'
 
 import './currencyConverter.scss'
@@ -34,9 +34,16 @@ const CurrencyConverter: React.FC<TProps> = ({
   currencyCode,
   currencyTargetCode,
 }) => {
+
+  const [activeFieldId, setActiveFieldId] = useState<number | null>(null)
+
   useEffect(() => {
     getPrice(currencyCode, currencyTargetCode)
   }, []) // eslint-disable-line
+
+  const onSetActiveFieldId = (id : number) => {
+    setActiveFieldId(id)
+  }
 
   return (
     <div className='currency-converter'>
@@ -55,6 +62,8 @@ const CurrencyConverter: React.FC<TProps> = ({
         currencyCode={currencyCode}
         currencyTargetCode={currencyTargetCode}
         getPrice={getPrice}
+        activeFieldId={activeFieldId}
+        setActiveFieldId={onSetActiveFieldId}
       />
       <div className='currency-converter__price mt-2'>
         {`1 ${currencyCode} = ${price} ${currencyTargetCode}`}

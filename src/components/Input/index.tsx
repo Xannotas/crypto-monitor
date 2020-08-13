@@ -18,17 +18,17 @@ const Input: React.FC<TProps> = ({
   placeholder,
   value,
   onChange,
-  type,
+  type = 'text',
   valueType,
 }) => {
   const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     let input = e.currentTarget.value
     if (valueType === 'number') {
       input = input
-        .replace(/[^.\d]+/g, '')
+        .replace(/[^.\d]+/g, '') 
         .replace(/^0{2}/g, '0')
-        .replace(/^0{1}\d+/g, input.slice(-1))
-        .replace(/^([^.]*\.)|\./g, '$1')
+        .replace(/^0{1}\d+/g, input.slice(-1)) // 0n -> n
+        .replace(/^([^.]*\.)|\./g, '$1') // .. -> .
     }
     onChange(input)
   }
@@ -37,7 +37,7 @@ const Input: React.FC<TProps> = ({
     <input
       className={classNames('form-control', className)}
       placeholder={placeholder}
-      type={type || 'text'}
+      type={type}
       value={value}
       onChange={onChangeHandler}
     />

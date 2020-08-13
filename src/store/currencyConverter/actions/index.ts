@@ -31,11 +31,11 @@ const getPriceSuccess = (payload: TGetPriceSuccessPayload): TGetPriceSuccess => 
 
 export type TActions = TGetPriceRequest | TGetPriceFailure | TGetPriceSuccess
 
-export const getPrice = (currency: TCoinCode) => async (dispatch: Dispatch, getState: ()=> TRootState) => {
+export const getPrice = (currency: TCoinCode, targetCurrency: TCoinCode) => async (dispatch: Dispatch, getState: ()=> TRootState) => {
   dispatch(getPriceRequest())
 
   try {
-    const targetCurrency = getState().currencyConverter.currencyTargetCode
+    // const targetCurrency = getState().currencyConverter.currencyTargetCode
 
     const response: any = await api.prices.getPrice(currency, targetCurrency)
     const data: number = response.data[targetCurrency]
