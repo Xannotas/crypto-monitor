@@ -1,27 +1,27 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "5a6cf66afea14cee325de0dd90ee587b",
+    "revision": "06a19c28dad0337e0f24a216035bde23",
     "url": "/crypto-monitor/index.html"
   },
   {
-    "revision": "bc6f858550353aa7ec55",
+    "revision": "964c14f30881c676d45b",
     "url": "/crypto-monitor/static/css/2.829c9cb5.chunk.css"
   },
   {
-    "revision": "01cce000fb4ff972ff15",
+    "revision": "8a50f46a0dd30f341899",
     "url": "/crypto-monitor/static/css/main.c23ca022.chunk.css"
   },
   {
-    "revision": "bc6f858550353aa7ec55",
-    "url": "/crypto-monitor/static/js/2.4924648d.chunk.js"
+    "revision": "964c14f30881c676d45b",
+    "url": "/crypto-monitor/static/js/2.d7911a18.chunk.js"
   },
   {
     "revision": "ca3cfcda77dc9f4f71fda9fdfcf14fb0",
-    "url": "/crypto-monitor/static/js/2.4924648d.chunk.js.LICENSE.txt"
+    "url": "/crypto-monitor/static/js/2.d7911a18.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "01cce000fb4ff972ff15",
-    "url": "/crypto-monitor/static/js/main.bfeb203c.chunk.js"
+    "revision": "8a50f46a0dd30f341899",
+    "url": "/crypto-monitor/static/js/main.253a747b.chunk.js"
   },
   {
     "revision": "8be2beec4f93e07f5412",
