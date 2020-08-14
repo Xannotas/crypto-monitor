@@ -93,7 +93,6 @@ export const getCoinInfo = (coinCode: TCoinCode) => async (dispatch: Dispatch, g
     if (data.Response !== 'Error') {
       const raw = data.RAW[coinCode][targetCoinCode]
       const display = data.DISPLAY[coinCode][targetCoinCode]
-      console.log(response);
       
       const coinInfo: TCoinFullInfo = {
         code: coinCode,
@@ -126,6 +125,18 @@ export const getCoinInfo = (coinCode: TCoinCode) => async (dispatch: Dispatch, g
 }
 
 export const getCoinHistory = (coinCode: TCoinCode) => async (dispatch: Dispatch, getState: () => TRootState) => {
+  const dateFormatPattern = {
+    '1h': 'HH:mm',
+    '1d': 'HH:mm',
+    '3d': 'dd MMM',
+    '1w': 'dd MMM',
+    '1m': 'dd MMM',
+    '3m': 'dd MMM',
+    '6m': 'dd MMM',
+    '1y': 'MMM yy',
+    '3y': 'MMM yy'
+  }
+
   dispatch(getCoinHistoryRequest())
   try {
     const targetCoinCode: TCoinCode = getState().coinInfo.targetCoinCode
@@ -135,7 +146,7 @@ export const getCoinHistory = (coinCode: TCoinCode) => async (dispatch: Dispatch
 
     if (response.data.Response !== 'Error') {
       const history: TCoinHistroryDataElement[] = data.map((row: any) => ({
-        formatedDate: formatDate(fromUnixTime(row.time), formatPattern[historyMode] || 'dd.MM.yyyy HH:mm'),
+        formatedDate: formatDate(fromUnixTime(row.time), dateFormatPattern[historyMode] || 'dd.MM.yyyy HH:mm'),
         fullDate: formatDate(fromUnixTime(row.time), 'dd MMM yyyy HH:mm'),
         price: row.open
       }))
@@ -148,16 +159,4 @@ export const getCoinHistory = (coinCode: TCoinCode) => async (dispatch: Dispatch
   } catch (e) {
     dispatch(getCoinHistoryFailure(e))
   }
-}
-
-const formatPattern = {
-  '1h': 'HH:mm',
-  '1d': 'HH:mm',
-  '3d': 'dd MMM',
-  '1w': 'dd MMM',
-  '1m': 'dd MMM',
-  '3m': 'dd MMM',
-  '6m': 'dd MMM',
-  '1y': 'MMM yy',
-  '3y': 'MMM yy'
 }

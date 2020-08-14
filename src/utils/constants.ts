@@ -12,10 +12,3 @@ export let currencies = {
   ...realCurrencies,
   ...defaultCurrencies.crypto
 }
-
-export const setCurrencies = (newCurrencies: any) => {
-  currencies = {
-    ...realCurrencies,
-    ...newCurrencies
-  }
-}
