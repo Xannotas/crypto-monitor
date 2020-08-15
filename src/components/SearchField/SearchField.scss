@@ -1,0 +1,24 @@
+.search-field {
+  display: inline-flex;
+  align-items: center;
+  width: 200px;
+  margin-right: 25px;
+
+  input {
+    height: 30px;
+    border: none;
+    border-bottom: 1px solid #34df7c;
+    border-radius: 0;
+    margin-right: 9px;
+    &:focus {
+      outline: none !important;
+    }
+  }
+  button {
+    border: none;
+    border-radius: 0;
+    background: transparent;
+    outline: none;
+    padding: 5px;
+  }
+}

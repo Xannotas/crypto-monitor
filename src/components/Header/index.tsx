@@ -6,6 +6,7 @@ import logoPng from './../../assets/header-logo.png'
 import { TCoinCode } from '../../utils/types'
 
 import { Select } from '../'
+import SearchField from '../SearchField'
 
 type TProps = {
   targetCoinCode: TCoinCode
@@ -34,7 +35,9 @@ const Header: React.FC<TProps> = ({ targetCoinCode, onTargetCoinChange }) => {
             </Link>
           </div>
           <div className='col-6 col-md-10'>
+
             <div className='header-menu'>
+            <SearchField />
               <Link to='/home' className='header-menu__item'>
                 {' '}
                 Home
@@ -54,6 +57,7 @@ const Header: React.FC<TProps> = ({ targetCoinCode, onTargetCoinChange }) => {
                 />
               </div>
             </div>
+            
           </div>
         </div>
       </div>
