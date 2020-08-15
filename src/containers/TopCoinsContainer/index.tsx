@@ -47,17 +47,17 @@ const TopCoinsContainer: React.FC<TProps> = ({
 
   return (
     <div className='top-coins'>
-      {isFetching ? (
-        <Loader />
-      ) : (
-        <div className='top-coins__wrapper'>
+      {isFetching && coins.length > 0
+        ? <Loader />
+        : <div className='top-coins__wrapper'>
           <TopCoinsTable
             coins={coins}
             pageNumber={pageNumber}
             pageSize={pageSize}
+            targetCoinCode={targetCoinCode}
           />
         </div>
-      )}
+      }
     </div>
   )
 }

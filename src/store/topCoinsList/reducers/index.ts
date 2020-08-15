@@ -8,9 +8,9 @@ const initialState = {
   _error: '' as string
 }
 
-export type TReducerState = typeof initialState 
+export type TReducerState = typeof initialState
 
-const topCoinsReducer = (state = initialState, action: TActions) : TReducerState=> {
+const topCoinsReducer = (state = initialState, action: TActions): TReducerState => {
   switch (action.type) {
     case 'TOP_COINS/GET_COINS:SUCCESS': {
       return {
@@ -29,7 +29,7 @@ const topCoinsReducer = (state = initialState, action: TActions) : TReducerState
       }
     }
 
-    case 'TOP_COINS/GET_COINS:REQUEST' : {
+    case 'TOP_COINS/GET_COINS:REQUEST': {
       return {
         ...state,
         isFetching: true,
@@ -37,7 +37,7 @@ const topCoinsReducer = (state = initialState, action: TActions) : TReducerState
       }
     }
 
-    case 'TOP_COINS/PAGE_NUMBER:CHANGE' : {
+    case 'TOP_COINS/PAGE_NUMBER:CHANGE': {
       return {
         ...state,
         pageNumber: action.payload
@@ -50,6 +50,18 @@ const topCoinsReducer = (state = initialState, action: TActions) : TReducerState
         pageNumber: 0,
         coins: [],
         _error: ''
+      }
+    }
+
+    case 'TOP_COINS/COIN_PRICE:CHANGE': {
+      return {
+        ...state,
+        coins: state.coins.map(coin => coin.code === action.payload.coinCode ? {
+          ...coin,
+          price: action.payload.price,
+          priceDirection: action.payload.price - Number(coin.price),
+          lastPriceUpdate: new Date().getTime()
+        } : coin)
       }
     }
 

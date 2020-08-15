@@ -1,4 +1,4 @@
-import { createStore, compose, applyMiddleware, combineReducers } from "redux";
+import { createStore, compose, applyMiddleware, combineReducers, Dispatch } from "redux";
 import thunk from 'redux-thunk'
 
 import topCoinsListReducer from './topCoinsList/reducers';
@@ -17,6 +17,8 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(rootReducer, /* preloadedState, */ composeEnhancers(
   applyMiddleware(thunk)
 ));
+
+export const dispatch: Dispatch = store.dispatch
 
 export type TRootState = ReturnType<typeof rootReducer>
 

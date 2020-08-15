@@ -89,11 +89,11 @@ export const getCoinInfo = (coinCode: TCoinCode) => async (dispatch: Dispatch, g
     const targetCoinCode: TCoinCode = getState().coinInfo.targetCoinCode
     const response: any = await api.coinInfo.getCoinInfo(coinCode, targetCoinCode)
     const data = response.data
-    
+
     if (data.Response !== 'Error') {
       const raw = data.RAW[coinCode][targetCoinCode]
       const display = data.DISPLAY[coinCode][targetCoinCode]
-      
+
       const coinInfo: TCoinFullInfo = {
         code: coinCode,
         name: currencies[coinCode],
@@ -142,7 +142,7 @@ export const getCoinHistory = (coinCode: TCoinCode) => async (dispatch: Dispatch
     const targetCoinCode: TCoinCode = getState().coinInfo.targetCoinCode
     const historyMode = getState().coinInfo.historyMode
     const response: any = await api.coinInfo.getCoinHistoryData(coinCode, targetCoinCode, historyMode)
-      const data: any[] = response.data.Data.Data
+    const data: any[] = response.data.Data.Data
 
     if (response.data.Response !== 'Error') {
       const history: TCoinHistroryDataElement[] = data.map((row: any) => ({

@@ -69,13 +69,13 @@ const CoinChart: React.FC<TProps> = ({
   }) => {
     return (
       <div className='customized-tooltip-content'>
-        <p className='total'>{`${
-          payload.length && (payload[0].payload as any).fullDate
-        }`}</p>
+        <p className='total'>{
+          `${payload.length && (payload[0].payload as any).fullDate}`
+        }</p>
         <ul className='list'>
           {payload.map((entry: any, index) => (
             <li key={`item-${index}`} style={{ color: entry.color }}>
-              {`${entry.name} : ${formatCost(entry.value, toSymbol, toCode)}`}
+              {`${entry.name} : ${toSymbol} ${formatCost(entry.value)} ${toCode}`}
             </li>
           ))}
         </ul>
@@ -98,10 +98,9 @@ const CoinChart: React.FC<TProps> = ({
           { error: historyError }
         )}
       >
-        {isFetching ? (
-          <Loader />
-        ) : (
-          <>
+        {isFetching
+          ? <Loader />
+          : <>
             {!historyError ? (
               <>
                 <div className='coin-info-rechart__controll'>
@@ -156,13 +155,13 @@ const CoinChart: React.FC<TProps> = ({
                 </div>
               </>
             ) : (
-              <div>
-                <div>{historyError}</div>
-                <div>Please change target currency.</div>
-              </div>
-            )}
+                <div>
+                  <div>{historyError}</div>
+                  <div>Please change target currency.</div>
+                </div>
+              )}
           </>
-        )}
+        }
       </div>
     </div>
   )

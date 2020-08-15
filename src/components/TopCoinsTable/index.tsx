@@ -1,21 +1,39 @@
+import React, {useEffect} from 'react'
 import { Link } from 'react-router-dom'
-import React from 'react'
+import classNames from 'classnames'
 
 import './topCoinsTable.scss'
-import { TCoinInfo } from '../../utils/types'
+import setupSocket from '../../sockets'
+import { TCoinInfo, TCoinCode } from '../../utils/types'
+import { trimRemain, formatCost } from '../../utils/helpers'
 
 type TProps = {
   coins: TCoinInfo[]
   pageNumber?: number
   pageSize?: number
+  targetCoinCode: TCoinCode
 }
 
 const TopCoinsTable: React.FC<TProps> = ({
   coins,
   pageNumber = 0,
   pageSize = 0,
-}) => (
-  <table className='table top-coins-table'>
+  targetCoinCode
+}) => {
+
+  const priceLiveTimeMs: number = 2000
+
+  useEffect(() => {
+    if (coins.length > 0) {
+      const socket = setupSocket(coins.map((c) => c.code), targetCoinCode)
+
+      return () => {
+        socket.close()
+      }
+    }
+  }, [coins.length, pageNumber]) //eslint-disable-line
+
+  return <table className='table top-coins-table'>
     <thead>
       <tr>
         <th scope='col-2'>#</th>
@@ -27,8 +45,11 @@ const TopCoinsTable: React.FC<TProps> = ({
       </tr>
     </thead>
     <tbody>
-      {coins.map((coin, index) => (
-        <tr key={coin.code}>
+      {coins.map((coin, index) => {
+        const date: number = new Date().getTime()
+        const priceLivingTimeMs = coin.lastPriceUpdate ? date - coin.lastPriceUpdate : 0
+
+        return <tr key={coin.code}>
           <th scope='row'>{index + 1 + pageNumber * pageSize}</th>
           <td>
             <Link to={`coins/${coin.code}`} className='top-coins__coin-name'>
@@ -44,14 +65,23 @@ const TopCoinsTable: React.FC<TProps> = ({
               </span>
             </Link>
           </td>
-          <td>{coin.price}</td>
-          <td>{coin.directVol}</td>
+          <td>
+            <div
+              className={classNames({
+                'price-down': coin.priceDirection && coin.priceDirection < 0 && priceLivingTimeMs < priceLiveTimeMs,
+                'price-up': coin.priceDirection && coin.priceDirection > 0 && priceLivingTimeMs < priceLiveTimeMs,
+              })}
+            >
+              {coin.toSymbol} {trimRemain(formatCost(coin.price, ' '), 8)}
+            </div>
+          </td>
+          <td>{coin.toSymbol} {trimRemain(formatCost(coin.directVol, ' '), 0)}</td>
           <td>{coin.totalVol}</td>
           <td>{coin.mktcap}</td>
         </tr>
-      ))}
+      })}
     </tbody>
   </table>
-)
+}
 
 export default TopCoinsTable

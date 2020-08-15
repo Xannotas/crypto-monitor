@@ -11,8 +11,9 @@ const GET_COINS_FAILURE = 'TOP_COINS/GET_COINS:FAILURE'
 
 const CHANGE_PAGE_NUMBER = 'TOP_COINS/PAGE_NUMBER:CHANGE'
 const RESET_LIST = 'TOP_COINS/LIST:RESET'
+const CHANGE_COIN_PRICE = 'TOP_COINS/COIN_PRICE:CHANGE'
 
-export type TActions = TGetCoinsRequest | TGetCoinsSuccess | TGetCoinsFailure | TChangePageNumber | TResetCoinsList
+export type TActions = TGetCoinsRequest | TGetCoinsSuccess | TGetCoinsFailure | TChangePageNumber | TResetCoinsList | TChangeCoinPrice
 
 type TGetCoinsRequest = { type: typeof GET_COINS_REQUEST }
 const getCoinsRequest = (): TGetCoinsRequest => ({
@@ -42,7 +43,13 @@ export const resetCoinsList = (): TResetCoinsList => ({
   type: RESET_LIST
 })
 
-export const getCoins = (limit : number = 10) => async (dispatch: Dispatch, getState: () => TRootState) => {
+type TChangeCoinPrice = { type: typeof CHANGE_COIN_PRICE, payload: { coinCode: TCoinCode, price: number } }
+export const changeCoinPrice = (payload: { coinCode: TCoinCode, price: number }): TChangeCoinPrice => ({
+  type: CHANGE_COIN_PRICE,
+  payload
+})
+
+export const getCoins = (limit: number = 10) => async (dispatch: Dispatch, getState: () => TRootState) => {
   dispatch(getCoinsRequest())
 
   try {
@@ -57,11 +64,12 @@ export const getCoins = (limit : number = 10) => async (dispatch: Dispatch, getS
       const coins: TCoinInfo[] = resCoins.map(coin => ({
         code: coin.CoinInfo.Name,
         name: coin.CoinInfo.FullName,
-        price: coin.DISPLAY[targetCoinCode].PRICE,
-        directVol: coin.DISPLAY[targetCoinCode].VOLUME24HOURTO.replace(/[,]/gi, ' ').split('.')[0],
+        price: coin.RAW[targetCoinCode].PRICE,
+        directVol: coin.RAW[targetCoinCode].VOLUME24HOURTO,
         totalVol: coin.DISPLAY[targetCoinCode].TOTALVOLUME24HTO,
         mktcap: coin.DISPLAY[targetCoinCode].MKTCAP,
-        imageUrl: imagesUrlServer + coin.CoinInfo.ImageUrl
+        imageUrl: imagesUrlServer + coin.CoinInfo.ImageUrl,
+        toSymbol: coin.DISPLAY[targetCoinCode].TOSYMBOL
       }))
 
       dispatch(getCoinsSuccess(coins))

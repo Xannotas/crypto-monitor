@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom'
 import './header.scss'
 import logoPng from './../../assets/header-logo.png'
 import { TCoinCode } from '../../utils/types'
-import { realCurrencies } from '../../utils/constants'
 
 import { Select } from '../'
 
@@ -15,10 +14,8 @@ type TProps = {
 
 const Header: React.FC<TProps> = ({ targetCoinCode, onTargetCoinChange }) => {
   const customCurrencies: TCoinCode[] = [
-    ...(Object.keys(realCurrencies) as TCoinCode[]),
     'BTC',
-    'ETH',
-    'LTC',
+    'USD',
   ]
 
   const oprions = customCurrencies.map((code) => (
