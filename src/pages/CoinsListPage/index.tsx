@@ -1,11 +1,9 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { connect } from 'react-redux'
 
 import './coinsListPage.scss'
 import { TRootState } from '../../store'
-import { changePageNumber } from '../../store/topCoinsList/actions'
 import {
-  pageNumberSelector,
   isFetchingSelector,
   coinsSelector,
 } from '../../store/topCoinsList/selectors'
@@ -15,25 +13,24 @@ import { SimplePagination } from '../../components'
 import { TCoinInfo } from '../../utils/types'
 
 type TMapState = {
-  pageNumber: number
   isFetching: boolean
   coins: TCoinInfo[]
 }
 
-type TMapDispatch = {
-  changePageNumber: (newPage: number) => void
-}
-
-type TProps = TMapState & TMapDispatch
+type TProps = TMapState
 
 const CoinPage: React.FC<TProps> = ({
-  changePageNumber,
-  pageNumber,
   isFetching,
   coins
 }) => {
+
+  const [pageNumber, setPageNumber] = useState<number>(0)
   const pageSize = 100
   const maxCoins = 3000
+
+  const changePageNumber = (num: number) => {
+    setPageNumber(num)
+  }
 
   return (
     <div className='coins-list-page'>
@@ -47,7 +44,7 @@ const CoinPage: React.FC<TProps> = ({
         )}
 
         <div className='mt-2'>
-          <TopCoinsContainer limit={pageSize} pageSize={pageSize} />
+          <TopCoinsContainer limit={pageSize} pageSize={pageSize} pageNumber={pageNumber}/>
         </div>
 
         {!isFetching && coins.length > 0 && (
@@ -64,12 +61,9 @@ const CoinPage: React.FC<TProps> = ({
 
 const mapState = (state: TRootState): TMapState => {
   return {
-    pageNumber: pageNumberSelector(state),
     isFetching: isFetchingSelector(state),
     coins: coinsSelector(state)
   }
 }
 
-export default connect<TMapState, TMapDispatch, {}, TRootState>(mapState, {
-  changePageNumber
-})(React.memo(CoinPage))
+export default connect<TMapState, {}, {}, TRootState>(mapState)(React.memo(CoinPage))

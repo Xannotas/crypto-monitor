@@ -16,7 +16,7 @@ type TProps = {
 }
 const TopCoinsTable: React.FC<TProps> = ({
   coins,
-  pageNumber = 0,
+  pageNumber,
   pageSize = 0,
   targetCoinCode,
   resetCoinsList
@@ -28,12 +28,14 @@ const TopCoinsTable: React.FC<TProps> = ({
       const socket = setupSocket(coins.map((c) => c.code), targetCoinCode)
 
       return () => {
-        resetCoinsList()
+        if(coins.length > 0) {
+          resetCoinsList()
+        }
         socket.close()
       }
     }
   }, [coins.length, pageNumber]) //eslint-disable-line
-
+  
   return <table className='table top-coins-table'>
     <thead>
       <tr>
@@ -51,7 +53,7 @@ const TopCoinsTable: React.FC<TProps> = ({
         const priceLivingTimeMs = coin.lastPriceUpdate ? date - coin.lastPriceUpdate : 0
 
         return <tr key={coin.code}>
-          <th scope='row'>{index + 1 + pageNumber * pageSize}</th>
+          <th scope='row'>{index + 1 + (pageNumber ? pageNumber * pageSize : 0)}</th>
           <td>
             <Link to={`coins/${coin.code}`} className='top-coins__coin-name'>
               <img

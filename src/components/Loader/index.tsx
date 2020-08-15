@@ -15,15 +15,10 @@ const Loader: React.FC<TProps> = ({
   small = false,
 }) => {
   return (
-    <div
-      className={classNames(
-        'loader',
-        { 'd-flex justify-content-center': center },
-        className
-      )}
+    <div className={classNames('loader', className,
+      { 'd-flex justify-content-center': center })}
     >
-      <div
-        className={classNames('spinner-border', { 'spinner-border-sm': small })}
+      <div className={classNames('spinner-border', { 'spinner-border-sm': small })}
         role='status'
       >
         <span className='sr-only'>Loading...</span>

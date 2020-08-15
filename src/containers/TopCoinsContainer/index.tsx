@@ -8,8 +8,7 @@ import { getCoins, resetCoinsList } from '../../store/topCoinsList/actions'
 import { targetCoinCodeSelector } from '../../store/coinInfo/selectors'
 import {
   coinsSelector,
-  isFetchingSelector,
-  pageNumberSelector,
+  isFetchingSelector
 } from '../../store/topCoinsList/selectors'
 
 import { TopCoinsTable, Loader } from '../../components'
@@ -17,17 +16,17 @@ import { TopCoinsTable, Loader } from '../../components'
 type TOwnProps = {
   limit: number
   pageSize?: number
+  pageNumber?: number
 }
 
 type TMapState = {
   coins: TCoinInfo[]
-  pageNumber: number
   isFetching: boolean
   targetCoinCode: TCoinCode
 }
 
 type TMapDispatch = {
-  getCoins: (limit: number) => void
+  getCoins: (limit: number, page: number | undefined) => void
   resetCoinsList: () => void
 }
 
@@ -44,7 +43,7 @@ const TopCoinsContainer: React.FC<TProps> = ({
   resetCoinsList
 }) => {
   useEffect(() => {
-    getCoins(limit)
+    getCoins(limit, pageNumber)
   }, [pageNumber, targetCoinCode]) // eslint-disable-line
 
   return (
@@ -71,7 +70,6 @@ const TopCoinsContainer: React.FC<TProps> = ({
 const mapState = (state: TRootState): TMapState => {
   return {
     coins: coinsSelector(state),
-    pageNumber: pageNumberSelector(state),
     isFetching: isFetchingSelector(state),
     targetCoinCode: targetCoinCodeSelector(state),
   }

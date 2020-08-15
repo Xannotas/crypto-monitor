@@ -14,15 +14,10 @@ type TProps = {
 }
 
 const Header: React.FC<TProps> = ({ targetCoinCode, onTargetCoinChange }) => {
-  const customCurrencies: TCoinCode[] = [
-    'BTC',
-    'USD',
-  ]
+  const customCurrencies: TCoinCode[] = ['BTC', 'USD']
 
   const oprions = customCurrencies.map((code) => (
-    <option key={code} value={code}>
-      {code}
-    </option>
+    <option key={code} value={code}>{code}</option>
   ))
 
   return (
@@ -31,21 +26,14 @@ const Header: React.FC<TProps> = ({ targetCoinCode, onTargetCoinChange }) => {
         <div className='row'>
           <div className='col-6 col-md-2'>
             <Link to='/home' className='header-logo'>
-              <img src={logoPng} alt='' />
+              <img src={logoPng} alt='logo' />
             </Link>
           </div>
           <div className='col-6 col-md-10'>
-
             <div className='header-menu'>
-            <SearchField />
-              <Link to='/home' className='header-menu__item'>
-                {' '}
-                Home
-              </Link>
-              <Link to='/coins' className='header-menu__item'>
-                {' '}
-                Coins
-              </Link>
+              <SearchField />
+              <Link to='/home' className='header-menu__item'>Home</Link>
+              <Link to='/coins' className='header-menu__item'>Coins</Link>
 
               <div className='header-menu__item'>
                 <Select
@@ -57,7 +45,7 @@ const Header: React.FC<TProps> = ({ targetCoinCode, onTargetCoinChange }) => {
                 />
               </div>
             </div>
-            
+
           </div>
         </div>
       </div>

@@ -87,15 +87,15 @@ const CoinChart: React.FC<TProps> = ({
     <div
       className={classNames(
         'coin-info-rechart',
-        { fetching: isFetching },
-        { error: historyError }
+        { 'fetching': isFetching },
+        { 'error': historyError }
       )}
     >
       <div
         className={classNames(
           'coin-info-rechart__wrapper',
-          { fetching: isFetching },
-          { error: historyError }
+          { 'fetching': isFetching },
+          { 'error': historyError }
         )}
       >
         {isFetching

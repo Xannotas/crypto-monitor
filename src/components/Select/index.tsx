@@ -14,15 +14,13 @@ const Select: React.FC<TProps> = ({ value, onChange, options, className }) => {
     onChange(e.currentTarget.value)
   }
 
-  return (
-    <select
-      className={classNames('custom-select', className)}
-      value={value}
-      onChange={onChangeHandler}
-    >
-      {options}
-    </select>
-  )
+  return <select
+    className={classNames('custom-select', className)}
+    value={value}
+    onChange={onChangeHandler}
+  >
+    {options}
+  </select>
 }
 
 export default React.memo(Select)
