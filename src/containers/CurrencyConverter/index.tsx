@@ -81,4 +81,4 @@ const mapState = (state: TRootState): TMapState => ({
 
 export default connect<TMapState, TMapDispatch, {}, TRootState>(mapState, {
   getPrice,
-})(CurrencyConverter)
+})(React.memo(CurrencyConverter))

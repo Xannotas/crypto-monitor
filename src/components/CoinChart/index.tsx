@@ -167,4 +167,4 @@ const CoinChart: React.FC<TProps> = ({
   )
 }
 
-export default CoinChart
+export default React.memo(CoinChart)

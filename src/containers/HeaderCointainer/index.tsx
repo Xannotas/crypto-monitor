@@ -39,4 +39,4 @@ const mapState = (state: TRootState): TMapState => {
 
 export default connect<TMapState, TMapDispatch, {}, TRootState>(mapState, {
   setTargetCoinCode,
-})(CoinInfo)
+})(React.memo(CoinInfo))

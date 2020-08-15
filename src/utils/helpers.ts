@@ -7,7 +7,7 @@ export const toRoundValue = (value: number) => {
 
 export const trimRemain = (value: string | number, length: number = 2, symb: string = '.') => {
   const splitedText = value.toString().split(symb)
-  if (splitedText[1] && length > 0 && splitedText[1].length > 0) {
+  if (splitedText[1] != null && length > 0) {
     return `${splitedText[0]}${symb}${splitedText[1].slice(0, length)}`
   }
   return splitedText[0]
@@ -21,4 +21,9 @@ export const formatCost = (value: string | number, replaceChar = ',') => {
   }
 
   return splitedCost[0]
+}
+
+export const removeEndZeros = (value: string | number) => {
+  const res = value.toString().match(/^[^.]+?(?=\.0*$)|^[^.]+?\..*?(?=0*$)|^[^.]*$/g)
+  return res ? res[0] : value
 }

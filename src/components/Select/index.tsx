@@ -25,4 +25,4 @@ const Select: React.FC<TProps> = ({ value, onChange, options, className }) => {
   )
 }
 
-export default Select
+export default React.memo(Select)

@@ -51,4 +51,4 @@ const CoinDetailInfo: React.FC<TProps> = ({ coinInfo }) => {
   )
 }
 
-export default CoinDetailInfo
+export default React.memo(CoinDetailInfo)

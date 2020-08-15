@@ -44,4 +44,4 @@ const Input: React.FC<TProps> = ({
   )
 }
 
-export default Input
+export default React.memo(Input)

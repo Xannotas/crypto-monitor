@@ -61,4 +61,4 @@ const Header: React.FC<TProps> = ({ targetCoinCode, onTargetCoinChange }) => {
   )
 }
 
-export default Header
+export default React.memo(Header)

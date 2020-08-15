@@ -86,4 +86,4 @@ const mapState = (state: TRootState): TMapState => {
 export default connect<TMapState, TMapDispatch, TOwnProps, TRootState>(
   mapState,
   { changeHistoryMode, getCoinHistory }
-)(CoinInfo)
+)(React.memo(CoinInfo))

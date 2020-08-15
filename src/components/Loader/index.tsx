@@ -32,4 +32,4 @@ const Loader: React.FC<TProps> = ({
   )
 }
 
-export default Loader
+export default React.memo(Loader)

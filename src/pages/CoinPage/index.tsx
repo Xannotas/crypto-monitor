@@ -48,21 +48,19 @@ const CoinPage: React.FC<TProps> = ({
   }, [coinCode, targetCoinCode]) // eslint-disable-line
 
   return (
-    <div className='coin'>
+    <section className='coin-page'>
       <div className='container'>
-        {isFetching ? (
-          <Loader />
-        ) : (
-          <>
-            {Object.keys(coinInfo).length && !error ? (
-              <CoinInfo coinInfo={coinInfo} targetCoinCode={targetCoinCode} />
-            ) : (
-              <p>{error}</p>
-            )}
+        {isFetching
+          ? <Loader />
+          : <>
+            {Object.keys(coinInfo).length && !error
+              ? <CoinInfo coinInfo={coinInfo} targetCoinCode={targetCoinCode} />
+              : <p>{error}</p>
+            }
           </>
-        )}
+        }
       </div>
-    </div>
+    </section>
   )
 }
 
@@ -78,4 +76,4 @@ const mapState = (state: TRootState): TMapState => {
 export default connect<TMapState, TMapDispatch, {}, TRootState>(mapState, {
   getCoinInfo,
   resetCoinInfo,
-})(CoinPage)
+})(React.memo(CoinPage))

@@ -84,4 +84,4 @@ const TopCoinsTable: React.FC<TProps> = ({
   </table>
 }
 
-export default TopCoinsTable
+export default React.memo(TopCoinsTable)

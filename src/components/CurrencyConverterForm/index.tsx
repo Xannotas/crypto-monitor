@@ -45,12 +45,14 @@ const CurrencyConverterForm: React.FC<TProps> = ({
   const onChangeFirstInput = (newValue: string) => {
     setFirstFieldValue(newValue)
     setSecondFieldValue(calcFuncs['mult'](newValue))
+
     setActiveFieldId(0)
   }
 
   const onChangeSecondInput = (newValue: string) => {
     setSecondFieldValue(newValue)
     setFirstFieldValue(calcFuncs['def'](newValue))
+
     setActiveFieldId(1)
   }
 
@@ -70,7 +72,7 @@ const CurrencyConverterForm: React.FC<TProps> = ({
       <div className='converter-field input-group mt-2'>
         <Input
           valueType='number'
-          value={firstFieldValue}
+          value={((firstFieldValue))}
           onChange={onChangeFirstInput}
         />
 
@@ -86,7 +88,7 @@ const CurrencyConverterForm: React.FC<TProps> = ({
       <div className='converter-field input-group mt-2'>
         <Input
           valueType='number'
-          value={secondFieldValue}
+          value={((secondFieldValue))}
           onChange={onChangeSecondInput}
         />
 
@@ -102,4 +104,4 @@ const CurrencyConverterForm: React.FC<TProps> = ({
   )
 }
 
-export default CurrencyConverterForm
+export default React.memo(CurrencyConverterForm)

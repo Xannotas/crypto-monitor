@@ -29,4 +29,4 @@ const SimplePagination: React.FC<TProps> = ({
   </div>
 )
 
-export default SimplePagination
+export default React.memo(SimplePagination)

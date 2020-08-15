@@ -32,7 +32,7 @@ const CoinPage: React.FC<TProps> = ({
   const maxCoins = 3000
 
   return (
-    <div className='coins-list mb-4'>
+    <div className='coins-list-page'>
       <div className='container'>
         {!isFetching && (
           <SimplePagination
@@ -66,5 +66,5 @@ const mapState = (state: TRootState): TMapState => {
 }
 
 export default connect<TMapState, TMapDispatch, {}, TRootState>(mapState, {
-  changePageNumber,
-})(CoinPage)
+  changePageNumber
+})(React.memo(CoinPage))

@@ -47,7 +47,7 @@ const TopCoinsContainer: React.FC<TProps> = ({
 
   return (
     <div className='top-coins'>
-      {isFetching && coins.length > 0
+      {isFetching
         ? <Loader />
         : <div className='top-coins__wrapper'>
           <TopCoinsTable
@@ -74,4 +74,4 @@ const mapState = (state: TRootState): TMapState => {
 export default connect<TMapState, TMapDispatch, TOwnProps, TRootState>(
   mapState,
   { getCoins }
-)(TopCoinsContainer)
+)(React.memo(TopCoinsContainer))
