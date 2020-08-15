@@ -1,0 +1,1 @@
+{"version":3,"sources":["coinsListPage.scss"],"names":[],"mappings":"AAAA,iBACE,kBAAmB,CADrB,0EAKQ,WAAY","file":"3.a96598e3.chunk.css","sourcesContent":[".coins-list-page {\r\n  margin-bottom: 40px;\r\n  .top-coins {\r\n    &-table {\r\n      td, th{\r\n        padding: 5px;\r\n      }\r\n    }\r\n  }\r\n}"]}
