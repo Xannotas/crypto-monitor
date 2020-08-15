@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import './topCoinsContainer.scss'
 import { TRootState } from '../../store'
 import { TCoinInfo, TCoinCode } from '../../utils/types'
-import { getCoins } from '../../store/topCoinsList/actions'
+import { getCoins, resetCoinsList } from '../../store/topCoinsList/actions'
 import { targetCoinCodeSelector } from '../../store/coinInfo/selectors'
 import {
   coinsSelector,
@@ -28,6 +28,7 @@ type TMapState = {
 
 type TMapDispatch = {
   getCoins: (limit: number) => void
+  resetCoinsList: () => void
 }
 
 type TProps = TMapState & TMapDispatch & TOwnProps
@@ -40,6 +41,7 @@ const TopCoinsContainer: React.FC<TProps> = ({
   targetCoinCode,
   pageSize,
   getCoins,
+  resetCoinsList
 }) => {
   useEffect(() => {
     getCoins(limit)
@@ -49,14 +51,18 @@ const TopCoinsContainer: React.FC<TProps> = ({
     <div className='top-coins'>
       {isFetching
         ? <Loader />
-        : <div className='top-coins__wrapper'>
-          <TopCoinsTable
-            coins={coins}
-            pageNumber={pageNumber}
-            pageSize={pageSize}
-            targetCoinCode={targetCoinCode}
-          />
-        </div>
+        : <>
+          {coins.length > 0 && <div className='top-coins__wrapper'>
+            <TopCoinsTable
+              coins={coins}
+              pageNumber={pageNumber}
+              pageSize={pageSize}
+              targetCoinCode={targetCoinCode}
+              resetCoinsList={resetCoinsList}
+            />
+          </div>
+          }
+        </>
       }
     </div>
   )
@@ -73,5 +79,5 @@ const mapState = (state: TRootState): TMapState => {
 
 export default connect<TMapState, TMapDispatch, TOwnProps, TRootState>(
   mapState,
-  { getCoins }
+  { getCoins, resetCoinsList }
 )(React.memo(TopCoinsContainer))

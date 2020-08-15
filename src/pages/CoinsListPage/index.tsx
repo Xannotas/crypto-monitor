@@ -7,14 +7,17 @@ import { changePageNumber } from '../../store/topCoinsList/actions'
 import {
   pageNumberSelector,
   isFetchingSelector,
+  coinsSelector,
 } from '../../store/topCoinsList/selectors'
 
 import { TopCoinsContainer } from '../../containers'
 import { SimplePagination } from '../../components'
+import { TCoinInfo } from '../../utils/types'
 
 type TMapState = {
   pageNumber: number
   isFetching: boolean
+  coins: TCoinInfo[]
 }
 
 type TMapDispatch = {
@@ -27,6 +30,7 @@ const CoinPage: React.FC<TProps> = ({
   changePageNumber,
   pageNumber,
   isFetching,
+  coins
 }) => {
   const pageSize = 100
   const maxCoins = 3000
@@ -34,7 +38,7 @@ const CoinPage: React.FC<TProps> = ({
   return (
     <div className='coins-list-page'>
       <div className='container'>
-        {!isFetching && (
+        {!isFetching && coins.length > 0 && (
           <SimplePagination
             pageNumber={pageNumber}
             maxPageNumber={maxCoins / pageSize}
@@ -46,7 +50,7 @@ const CoinPage: React.FC<TProps> = ({
           <TopCoinsContainer limit={pageSize} pageSize={pageSize} />
         </div>
 
-        {!isFetching && (
+        {!isFetching && coins.length > 0 && (
           <SimplePagination
             pageNumber={pageNumber}
             maxPageNumber={maxCoins / pageSize}
@@ -62,6 +66,7 @@ const mapState = (state: TRootState): TMapState => {
   return {
     pageNumber: pageNumberSelector(state),
     isFetching: isFetchingSelector(state),
+    coins: coinsSelector(state)
   }
 }
 

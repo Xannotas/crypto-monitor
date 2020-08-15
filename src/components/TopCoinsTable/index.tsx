@@ -12,15 +12,15 @@ type TProps = {
   pageNumber?: number
   pageSize?: number
   targetCoinCode: TCoinCode
+  resetCoinsList: () => void
 }
-
 const TopCoinsTable: React.FC<TProps> = ({
   coins,
   pageNumber = 0,
   pageSize = 0,
-  targetCoinCode
+  targetCoinCode,
+  resetCoinsList
 }) => {
-
   const priceLiveTimeMs: number = 2000
 
   useEffect(() => {
@@ -28,6 +28,7 @@ const TopCoinsTable: React.FC<TProps> = ({
       const socket = setupSocket(coins.map((c) => c.code), targetCoinCode)
 
       return () => {
+        resetCoinsList()
         socket.close()
       }
     }
