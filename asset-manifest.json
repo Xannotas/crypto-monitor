@@ -1,31 +1,31 @@
 {
   "files": {
-    "main.css": "/crypto-monitor/static/css/main.bc2b688b.chunk.css",
-    "main.js": "/crypto-monitor/static/js/main.a2268692.chunk.js",
-    "main.js.map": "/crypto-monitor/static/js/main.a2268692.chunk.js.map",
-    "runtime-main.js": "/crypto-monitor/static/js/runtime-main.476c6390.js",
-    "runtime-main.js.map": "/crypto-monitor/static/js/runtime-main.476c6390.js.map",
+    "main.css": "/crypto-monitor/static/css/main.e909faee.chunk.css",
+    "main.js": "/crypto-monitor/static/js/main.470626fa.chunk.js",
+    "main.js.map": "/crypto-monitor/static/js/main.470626fa.chunk.js.map",
+    "runtime-main.js": "/crypto-monitor/static/js/runtime-main.1a0da92c.js",
+    "runtime-main.js.map": "/crypto-monitor/static/js/runtime-main.1a0da92c.js.map",
     "static/css/2.829c9cb5.chunk.css": "/crypto-monitor/static/css/2.829c9cb5.chunk.css",
-    "static/js/2.a1ffcd8c.chunk.js": "/crypto-monitor/static/js/2.a1ffcd8c.chunk.js",
-    "static/js/2.a1ffcd8c.chunk.js.map": "/crypto-monitor/static/js/2.a1ffcd8c.chunk.js.map",
+    "static/js/2.3c6b33c9.chunk.js": "/crypto-monitor/static/js/2.3c6b33c9.chunk.js",
+    "static/js/2.3c6b33c9.chunk.js.map": "/crypto-monitor/static/js/2.3c6b33c9.chunk.js.map",
     "static/css/3.a96598e3.chunk.css": "/crypto-monitor/static/css/3.a96598e3.chunk.css",
-    "static/js/3.beda4b34.chunk.js": "/crypto-monitor/static/js/3.beda4b34.chunk.js",
-    "static/js/3.beda4b34.chunk.js.map": "/crypto-monitor/static/js/3.beda4b34.chunk.js.map",
-    "static/js/4.d1624036.chunk.js": "/crypto-monitor/static/js/4.d1624036.chunk.js",
-    "static/js/4.d1624036.chunk.js.map": "/crypto-monitor/static/js/4.d1624036.chunk.js.map",
+    "static/js/3.2e670d1b.chunk.js": "/crypto-monitor/static/js/3.2e670d1b.chunk.js",
+    "static/js/3.2e670d1b.chunk.js.map": "/crypto-monitor/static/js/3.2e670d1b.chunk.js.map",
+    "static/js/4.7d0a779b.chunk.js": "/crypto-monitor/static/js/4.7d0a779b.chunk.js",
+    "static/js/4.7d0a779b.chunk.js.map": "/crypto-monitor/static/js/4.7d0a779b.chunk.js.map",
     "index.html": "/crypto-monitor/index.html",
-    "precache-manifest.124fc9d90f2a1a9d362899e6ff1a0814.js": "/crypto-monitor/precache-manifest.124fc9d90f2a1a9d362899e6ff1a0814.js",
+    "precache-manifest.3e7454faa1e72baba93073af69d64a3b.js": "/crypto-monitor/precache-manifest.3e7454faa1e72baba93073af69d64a3b.js",
     "service-worker.js": "/crypto-monitor/service-worker.js",
     "static/css/2.829c9cb5.chunk.css.map": "/crypto-monitor/static/css/2.829c9cb5.chunk.css.map",
     "static/css/3.a96598e3.chunk.css.map": "/crypto-monitor/static/css/3.a96598e3.chunk.css.map",
-    "static/css/main.bc2b688b.chunk.css.map": "/crypto-monitor/static/css/main.bc2b688b.chunk.css.map",
-    "static/js/2.a1ffcd8c.chunk.js.LICENSE.txt": "/crypto-monitor/static/js/2.a1ffcd8c.chunk.js.LICENSE.txt"
+    "static/css/main.e909faee.chunk.css.map": "/crypto-monitor/static/css/main.e909faee.chunk.css.map",
+    "static/js/2.3c6b33c9.chunk.js.LICENSE.txt": "/crypto-monitor/static/js/2.3c6b33c9.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.476c6390.js",
+    "static/js/runtime-main.1a0da92c.js",
     "static/css/2.829c9cb5.chunk.css",
-    "static/js/2.a1ffcd8c.chunk.js",
-    "static/css/main.bc2b688b.chunk.css",
-    "static/js/main.a2268692.chunk.js"
+    "static/js/2.3c6b33c9.chunk.js",
+    "static/css/main.e909faee.chunk.css",
+    "static/js/main.470626fa.chunk.js"
   ]
 }
