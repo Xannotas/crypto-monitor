@@ -26,7 +26,6 @@ const TopCoinsTable: React.FC<TProps> = ({
   useEffect(() => {
     if (coins.length > 0) {
       const socket = setupSocket(coins.map((c) => c.code), targetCoinCode)
-
       return () => {
         if(coins.length > 0) {
           resetCoinsList()

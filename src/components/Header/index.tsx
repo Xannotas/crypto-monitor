@@ -1,20 +1,19 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { useSelector, useDispatch } from 'react-redux'
 
 import './header.scss'
 import logoPng from './../../assets/header-logo.png'
 import { TCoinCode } from '../../utils/types'
+import { targetCoinCodeSelector } from '../../store/coinInfo/selectors'
+import { setTargetCoinCode } from '../../store/coinInfo/actions'
 
-import { Select } from '../'
-import SearchField from '../SearchField'
+import { Select, SearchField } from '../'
 
-type TProps = {
-  targetCoinCode: TCoinCode
-  onTargetCoinChange: (code: TCoinCode) => void
-}
-
-const Header: React.FC<TProps> = ({ targetCoinCode, onTargetCoinChange }) => {
+const Header: React.FC = () => {
+  const dispatch = useDispatch()
   const customCurrencies: TCoinCode[] = ['BTC', 'USD']
+  const targetCoinCode = useSelector(targetCoinCodeSelector)
 
   const oprions = customCurrencies.map((code) => (
     <option key={code} value={code}>{code}</option>
@@ -40,7 +39,7 @@ const Header: React.FC<TProps> = ({ targetCoinCode, onTargetCoinChange }) => {
                   value={targetCoinCode}
                   options={oprions}
                   onChange={(value: string) =>
-                    onTargetCoinChange(value as TCoinCode)
+                    dispatch(setTargetCoinCode(value as TCoinCode))
                   }
                 />
               </div>

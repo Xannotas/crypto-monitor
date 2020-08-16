@@ -8,15 +8,15 @@ type TProps = {
   coinInfo: TCoinFullInfo
   targetCoinCode: TCoinCode
 }
+
 const CoinHeadInfo: React.FC<TProps> = ({ coinInfo, targetCoinCode }) => {
   const priceDown: boolean = coinInfo.changePercent24Hour && coinInfo.changePercent24Hour[0] === '-' ? true : false
 
-  console.log(coinInfo.name)
   return (
     <div className='coin-info-head'>
       <h3 className='coin-info-head__title'>
         {coinInfo.name ? coinInfo.name : coinInfo.code}
-        <small className={classNames('ml-2',{'d-none': !coinInfo.name})}>({coinInfo.code})</small>
+        <small className={classNames('ml-2', { 'd-none': !coinInfo.name })}>({coinInfo.code})</small>
       </h3>
 
       <div className='coin-info-head__wrapper'>

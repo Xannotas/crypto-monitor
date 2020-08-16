@@ -64,6 +64,7 @@ const CoinChart: React.FC<TProps> = ({
   type TRenderTooltipContentProps = {
     payload: PropsWithChildren<TRenderTooltipContentProps>[]
   }
+
   const renderTooltipContent: React.FC<TRenderTooltipContentProps> = ({
     payload,
   }) => {

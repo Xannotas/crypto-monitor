@@ -1,8 +1,7 @@
 import React, { Suspense } from 'react'
 import { Switch, Route, Redirect } from 'react-router-dom'
 
-import { HeaderCointainer } from './containers'
-import { Loader } from './components'
+import { Loader, Header} from './components'
 
 import HomePage  from './pages/HomePage'
 const CoinPage = React.lazy(() => import('./pages/CoinPage'))
@@ -11,7 +10,7 @@ const CoinsListPage = React.lazy(() => import('./pages/CoinsListPage'))
 const App = () => {
   return (
     <div className='App'>
-      <HeaderCointainer />
+      <Header />
       <Suspense fallback={<Loader />}>
         <Switch>
           <Route exact path='/home' component={HomePage} />
