@@ -1,13 +1,12 @@
 # Cryptocurrency monitor
 Demo: https://xannotas.github.io/crypto-monitor/
 
-### Base functions:
+### Basic functions:
 - Currency converter
 - Currency rate chart
 - Basic currency information
 - Top currency list
-- Получение актуальной цены валюты по вебсокетам
-- Update the currect currency price on WebSockets
+- Updating the currect currency price on WebSockets
 - Simple search
 
 ### Stack:
@@ -21,7 +20,7 @@ Demo: https://xannotas.github.io/crypto-monitor/
 - Axios
 - Bootstrap
 
-### Screenshots
+### Screenshots:
 > Home page
 ![Home page](https://i.ibb.co/6vt4tYg/3-min.png)
 
