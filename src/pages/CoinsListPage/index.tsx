@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import { connect } from 'react-redux'
 
 import './coinsListPage.scss'
@@ -44,7 +44,7 @@ const CoinPage: React.FC<TProps> = ({
         )}
 
         <div className='mt-2'>
-          <TopCoinsContainer limit={pageSize} pageSize={pageSize} pageNumber={pageNumber}/>
+          <TopCoinsContainer limit={pageSize} pageSize={pageSize} pageNumber={pageNumber} showSparkChart={true} />
         </div>
 
         {!isFetching && coins.length > 0 && (

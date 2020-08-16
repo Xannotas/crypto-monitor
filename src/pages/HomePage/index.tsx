@@ -1,20 +1,8 @@
 import React from 'react'
-import { connect } from 'react-redux'
-
-import { TRootState } from '../../store'
-import { isFetchingSelector } from '../../store/topCoinsList/selectors'
 
 import { CurrencyConverter, TopCoinsContainer } from '../../containers'
 
-type TStateProps = {
-  isFetching: boolean
-}
-
-type TDispatchProps = {}
-
-type TProps = TStateProps & TDispatchProps
-
-const HomePage: React.FC<TProps> = ({ isFetching }) => {
+const HomePage: React.FC = () => {
   return <section className='home-page'>
     <div className='container'>
       <div className='row'>
@@ -30,10 +18,4 @@ const HomePage: React.FC<TProps> = ({ isFetching }) => {
   </section>
 }
 
-const mapState = (state: TRootState): TStateProps => ({
-  isFetching: isFetchingSelector(state)
-})
-
-export default connect<TStateProps, TDispatchProps, {}, TRootState>(
-  mapState
-)(React.memo(HomePage))
+export default React.memo(HomePage)

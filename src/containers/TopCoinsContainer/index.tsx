@@ -17,6 +17,7 @@ type TOwnProps = {
   limit: number
   pageSize?: number
   pageNumber?: number
+  showSparkChart?: boolean
 }
 
 type TMapState = {
@@ -39,6 +40,7 @@ const TopCoinsContainer: React.FC<TProps> = ({
   limit,
   targetCoinCode,
   pageSize,
+  showSparkChart = false,
   getCoins,
   resetCoinsList
 }) => {
@@ -58,6 +60,7 @@ const TopCoinsContainer: React.FC<TProps> = ({
               pageSize={pageSize}
               targetCoinCode={targetCoinCode}
               resetCoinsList={resetCoinsList}
+              showSparkChart={showSparkChart}
             />
           </div>
           }

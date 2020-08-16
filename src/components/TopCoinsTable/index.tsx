@@ -12,6 +12,7 @@ type TProps = {
   pageNumber?: number
   pageSize?: number
   targetCoinCode: TCoinCode
+  showSparkChart: boolean
   resetCoinsList: () => void
 }
 const TopCoinsTable: React.FC<TProps> = ({
@@ -19,6 +20,7 @@ const TopCoinsTable: React.FC<TProps> = ({
   pageNumber,
   pageSize = 0,
   targetCoinCode,
+  showSparkChart,
   resetCoinsList
 }) => {
   const priceLiveTimeMs: number = 2000
@@ -44,12 +46,14 @@ const TopCoinsTable: React.FC<TProps> = ({
         <th scope='col'>Direct Vol</th>
         <th scope='col'>Total Vol</th>
         <th scope='col'>Market cap.</th>
+        {showSparkChart && <th scope='col'>7d Chart (USD)</th>}
       </tr>
     </thead>
     <tbody>
       {coins.map((coin, index) => {
         const date: number = new Date().getTime()
         const priceLivingTimeMs = coin.lastPriceUpdate ? date - coin.lastPriceUpdate : 0
+        const sparkChartUrl = `https://images.cryptocompare.com/sparkchart/${coin.code}/USD/latest.png?ts=1597546800`
 
         return <tr key={coin.code}>
           <th scope='row'>{index + 1 + (pageNumber ? pageNumber * pageSize : 0)}</th>
@@ -80,6 +84,7 @@ const TopCoinsTable: React.FC<TProps> = ({
           <td>{coin.toSymbol} {trimRemain(formatCost(coin.directVol, ' '), 0)}</td>
           <td>{coin.totalVol}</td>
           <td>{coin.mktcap}</td>
+          {showSparkChart && <td><img src={sparkChartUrl} alt="Chart"/></td>}
         </tr>
       })}
     </tbody>
