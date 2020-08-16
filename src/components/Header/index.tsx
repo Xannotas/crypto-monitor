@@ -23,12 +23,12 @@ const Header: React.FC = () => {
     <div className='header'>
       <div className='container'>
         <div className='row'>
-          <div className='col-6 col-md-2'>
+          <div className='col-12 col-md-2'>
             <Link to='/home' className='header-logo'>
               <img src={logoPng} alt='logo' />
             </Link>
           </div>
-          <div className='col-6 col-md-10'>
+          <div className='col-12 col-md-10'>
             <div className='header-menu'>
               <SearchField />
               <Link to='/home' className='header-menu__item'>Home</Link>
