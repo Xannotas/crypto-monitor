@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "2bce8b3c6bc35af9cbe23fe4d06d7d16",
+    "revision": "78dc34e85cc2ac9b9f7f2ec394ef2ff3",
     "url": "/crypto-monitor/index.html"
   },
   {
@@ -12,8 +12,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/crypto-monitor/static/css/3.a96598e3.chunk.css"
   },
   {
-    "revision": "9a101e8445d645bc54b0",
-    "url": "/crypto-monitor/static/css/main.129fc11b.chunk.css"
+    "revision": "df69ec19c71cf61b7ddd",
+    "url": "/crypto-monitor/static/css/main.a6e8456e.chunk.css"
   },
   {
     "revision": "639b1597adae135253cb",
@@ -32,8 +32,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/crypto-monitor/static/js/4.d3ee9801.chunk.js"
   },
   {
-    "revision": "9a101e8445d645bc54b0",
-    "url": "/crypto-monitor/static/js/main.866ee534.chunk.js"
+    "revision": "df69ec19c71cf61b7ddd",
+    "url": "/crypto-monitor/static/js/main.96cc297f.chunk.js"
   },
   {
     "revision": "26f55e8e608a50abce7b",
