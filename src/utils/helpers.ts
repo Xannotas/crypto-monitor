@@ -1,10 +1,11 @@
-export const toRoundValue = (value: number) => {
+export const toRoundValue = (value: number, quality: number = 2) => {
   if (value <= 0) {
     return 0
   }
-  return Math.floor((value * 100)) / 100
-}
 
+  const rank = Math.pow(10, quality)
+  return Math.floor((value * rank)) / rank
+}
 export const trimRemain = (value: string | number, length: number = 2, symb: string = '.') => {
   const splitedText = value.toString().split(symb)
   if (splitedText[1] != null && length > 0) {
