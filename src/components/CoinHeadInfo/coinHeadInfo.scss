@@ -29,6 +29,16 @@
         font-size: 1.6rem;
       }
     }
+    &-date {
+      img {
+        vertical-align: middle;
+        margin-right: 10px;
+      }
+      span {
+        font-size: 14px;
+        color: #8a8a8a;
+      }
+    }
   }
 }
 

@@ -1,7 +1,10 @@
 import React from 'react'
 import classNames from 'classnames'
+import fromUnixTime from 'date-fns/fromUnixTime'
+import formatDate from 'date-fns/format'
 
 import './coinHeadInfo.scss'
+import clockSvg from '../../assets/icons/clock.svg'
 import { TCoinFullInfo, TCoinCode } from '../../utils/types'
 
 type TProps = {
@@ -36,32 +39,30 @@ const CoinHeadInfo: React.FC<TProps> = ({ coinInfo, targetCoinCode }) => {
             )}
           >
             <span className='coin-info-head__change-arrow'>
-              {priceDown ? (
-                <svg
-                  className='bi bi-caret-down-fill'
-                  width='1em'
-                  height='1em'
-                  viewBox='0 0 16 16'
-                  fill='#ff7060'
-                  xmlns='http://www.w3.org/2000/svg'
-                >
-                  <path d='M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z' />
-                </svg>
-              ) : (
-                  <svg
-                    className='bi bi-caret-up-fill'
-                    width='1em'
-                    height='1em'
-                    viewBox='0 0 16 16'
-                    fill='#26da71'
-                    xmlns='http://www.w3.org/2000/svg'
-                  >
-                    <path d='M7.247 4.86l-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z' />
-                  </svg>
-                )}
+              <svg
+                className='bi bi-caret-down-fill'
+                width='1em'
+                height='1em'
+                viewBox='0 0 16 16'
+                fill={priceDown ? '#ff7060' : '#26da71'}
+                xmlns='http://www.w3.org/2000/svg'
+              >
+                {priceDown
+                  ? <path d='M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z' />
+                  : <path d='M7.247 4.86l-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z' />
+                }
+              </svg>
+              
             </span>
             {coinInfo.change24Hour} ({coinInfo.changePercent24Hour} %)
           </div>
+
+          {coinInfo.lastPriceUpdate &&
+            <div className='coin-info-head__price-date'>
+              <img src={clockSvg} alt="last update" />
+              <span>{formatDate(fromUnixTime(coinInfo.lastPriceUpdate), 'dd.MM.yyyy HH:mm')}</span>
+            </div>
+          }
         </div>
       </div>
     </div>

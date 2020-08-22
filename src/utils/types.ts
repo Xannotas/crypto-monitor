@@ -13,6 +13,7 @@ export type TCoinInfo = {
   imageUrl: string
   priceDirection?: number
   lastPriceUpdate?: number
+  market?: string
 }
 
 export type TCoinFullInfo = TCoinInfo & {

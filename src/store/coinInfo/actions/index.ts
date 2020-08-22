@@ -93,7 +93,7 @@ export const getCoinInfo = (coinCode: TCoinCode) => async (dispatch: Dispatch, g
     if (data.Response !== 'Error') {
       const raw = data.RAW[coinCode][targetCoinCode]
       const display = data.DISPLAY[coinCode][targetCoinCode]
-
+      
       const coinInfo: TCoinFullInfo = {
         code: coinCode,
         name: currencies[coinCode],
@@ -111,6 +111,7 @@ export const getCoinInfo = (coinCode: TCoinCode) => async (dispatch: Dispatch, g
         change24Hour: display.CHANGE24HOUR,
         low24Hour: raw.LOW24HOUR,
         high24Hour: raw.HIGH24HOUR,
+        lastPriceUpdate: raw.LASTUPDATE
       }
 
       dispatch(getCoinInfoSuccess(coinInfo))
